@@ -1,0 +1,76 @@
+/* Material study only: no dimensions, spacing, type scale or icon geometry.
+ * DSH palette source: installed ui-theme 0.2.1-rc.2.
+ * Original 05 / 05 raised is frozen in design/archive/session-material-05/. */
+
+/* A — a neutral mist, soft edges, a small luminance step for the card. */
+body[data-material=mist] .dsh-switcher {
+  --sw-tint: rgb(242 243 245 / .84); --sw-edge: rgb(30 32 36 / .10);
+  --sw-ink: #303236; --sw-muted: #61666b; --sw-faint: #81858c;
+  --sw-fill: rgb(255 255 255 / .72); --sw-card-edge: rgb(255 255 255 / .70);
+  --sw-selection: rgb(38 49 72 / .065); --sw-opaque: #f2f3f5;
+  --sw-blue: #55749c; --sw-amber: #967747;
+  --sw-card-shadow: 0 1px 2px rgb(28 31 35 / .035), 0 3px 9px rgb(28 31 35 / .025);
+  --sw-shadow: 0 14px 36px rgb(18 20 24 / .10), 0 2px 5px rgb(18 20 24 / .045), inset 0 1px rgb(255 255 255 / .70);
+  --material-blur: 42px; --material-saturation: 100%;
+}
+body[data-material=mist] .dsh-switcher[data-theme=dark] {
+  --sw-tint: rgb(35 35 36 / .86); --sw-edge: rgb(255 255 255 / .10);
+  --sw-ink: #dcdee1; --sw-muted: #adb2b8; --sw-faint: #979da6;
+  --sw-fill: rgb(53 54 56 / .68); --sw-card-edge: rgb(255 255 255 / .035);
+  --sw-selection: rgb(255 255 255 / .055); --sw-opaque: #232324;
+  --sw-blue: #8da9ce; --sw-amber: #c4a975;
+  --sw-card-shadow: inset 0 1px rgb(255 255 255 / .025), 0 1px 2px rgb(0 0 0 / .13), 0 3px 7px rgb(0 0 0 / .07);
+  --sw-shadow: 0 16px 38px rgb(0 0 0 / .24), 0 2px 5px rgb(0 0 0 / .16), inset 0 1px rgb(255 255 255 / .035);
+}
+
+/* B — more light passes through the shell; cards share the blurred backdrop. */
+body[data-material=glass] .dsh-switcher {
+  --sw-tint: rgb(241 243 246 / .58); --sw-edge: rgb(255 255 255 / .85);
+  --sw-ink: #30343a; --sw-muted: #61666b; --sw-faint: #81858c;
+  --sw-fill: rgb(255 255 255 / .57); --sw-card-edge: rgb(255 255 255 / .65);
+  --sw-selection: rgb(38 49 72 / .065); --sw-opaque: #f1f3f5;
+  --sw-blue: #55749c; --sw-amber: #967747;
+  --sw-card-shadow: 0 1px 2px rgb(28 31 35 / .04), 0 4px 12px rgb(28 31 35 / .025);
+  --sw-shadow: 0 16px 38px rgb(18 20 24 / .12), 0 0 0 1px rgb(30 32 36 / .045), inset 0 1px rgb(255 255 255 / .60);
+  --material-blur: 48px; --material-saturation: 108%;
+}
+body[data-material=glass] .dsh-switcher[data-theme=dark] {
+  --sw-tint: rgb(39 40 42 / .58); --sw-edge: rgb(255 255 255 / .115);
+  --sw-ink: #e1e3e6; --sw-muted: #b4b8be; --sw-faint: #979da6;
+  --sw-fill: rgb(255 255 255 / .052); --sw-card-edge: rgb(255 255 255 / .05);
+  --sw-selection: rgb(255 255 255 / .07); --sw-opaque: #27282a;
+  --sw-blue: #95aed0; --sw-amber: #c4a975;
+  --sw-card-shadow: inset 0 1px rgb(255 255 255 / .025), 0 2px 5px rgb(0 0 0 / .10);
+  --sw-shadow: 0 18px 40px rgb(0 0 0 / .27), 0 2px 6px rgb(0 0 0 / .13), inset 0 1px rgb(255 255 255 / .045);
+}
+
+/* C — the clearest raised card, with a neutral fill and diffuse contact shadow. */
+body[data-material=soft] .dsh-switcher {
+  --sw-tint: rgb(239 240 242 / .92); --sw-edge: rgb(30 32 36 / .085);
+  --sw-ink: #303236; --sw-muted: #61666b; --sw-faint: #81858c;
+  --sw-fill: rgb(255 255 255 / .94); --sw-card-edge: rgb(255 255 255 / .88);
+  --sw-selection: rgb(38 49 72 / .055); --sw-opaque: #eff0f2;
+  --sw-blue: #55749c; --sw-amber: #967747;
+  --sw-card-shadow: 0 1px 2px rgb(28 31 35 / .035), 0 4px 10px rgb(28 31 35 / .055);
+  --sw-shadow: 0 14px 34px rgb(18 20 24 / .10), 0 2px 5px rgb(18 20 24 / .04), inset 0 1px rgb(255 255 255 / .80);
+  --material-blur: 28px; --material-saturation: 100%;
+}
+body[data-material=soft] .dsh-switcher[data-theme=dark] {
+  --sw-tint: rgb(37 37 39 / .93); --sw-edge: rgb(255 255 255 / .09);
+  --sw-ink: #dfe1e4; --sw-muted: #adb2b8; --sw-faint: #979da6;
+  --sw-fill: rgb(54 55 57 / .94); --sw-card-edge: rgb(255 255 255 / .035);
+  --sw-selection: rgb(255 255 255 / .045); --sw-opaque: #252527;
+  --sw-blue: #8da9ce; --sw-amber: #c4a975;
+  --sw-card-shadow: inset 0 1px rgb(255 255 255 / .04), 0 1px 2px rgb(0 0 0 / .14), 0 5px 10px rgb(0 0 0 / .15);
+  --sw-shadow: 0 16px 38px rgb(0 0 0 / .25), 0 2px 5px rgb(0 0 0 / .15), inset 0 1px rgb(255 255 255 / .035);
+}
+
+body:not([data-material=baseline]) .dsh-switcher-panel {
+  backdrop-filter: blur(var(--material-blur)) saturate(var(--material-saturation));
+  -webkit-backdrop-filter: blur(var(--material-blur)) saturate(var(--material-saturation));
+}
+@media(prefers-reduced-transparency:reduce), (prefers-contrast:more) {
+  body:not([data-material=baseline]) .dsh-switcher-panel { backdrop-filter: none; -webkit-backdrop-filter: none; background: var(--sw-opaque); }
+  body:not([data-material=baseline]) .dsh-switcher-body { background: #fff; }
+  body:not([data-material=baseline]) .dsh-switcher[data-theme=dark] .dsh-switcher-body { background: #353638; }
+}

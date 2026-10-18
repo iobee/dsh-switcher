@@ -20,7 +20,7 @@ npm run build
 npm test
 npm run check
 npm run pack:local
-dsh plugin --profile desktop add /absolute/path/to/dsh-switcher/dist/dsh-switcher-0.1.2.tgz --offline --ignore-scripts
+dsh plugin --profile desktop add /absolute/path/to/dsh-switcher/dist/dsh-switcher-0.1.3.tgz --offline --ignore-scripts
 ```
 
 安装包只有客户端代码、空的宿主入口、插件补丁、包信息和说明。使用官方插件安装路径，不修改 DSH 应用包。针对 DSH **0.2.1-rc.2** 的公开客户端服务开发，目前本机验证平台为 macOS。
@@ -31,11 +31,11 @@ Ctrl + Tab 由主文档直接处理完整的按下/松开事件，不通过宿�
 
 ## 已选视觉
 
-保持 **05 亮色 / 05 raised 暗色 / Dia 尺寸 / 完整 11「五拍」图标**。
+当前采用 **B「轻透」明暗材质 / Dia 尺寸 / 完整 11「五拍」图标**。用户于 2026-10-19 选择 B，仅调整配色、透明度、模糊、边缘与阴影；05 亮色 / 05 raised 暗色继续归档保留。
 
 整体 942 × 190，单项 182 × 158，内容面 158 × 106，图标 20px。不足五项时容器随数量缩短，窄窗口横向滚动。中性选中底色，无缩放、无标题栏、无底部提示。浮层使用网页 `backdrop-filter`，不宣称已接入 macOS 原生桌面材质。尊重减少动态效果、减少透明度及增强对比度设置。
 
-![已选设计亮色基线](design/preview-light.png)
+![B 轻透亮色材质预览](design/reviews/2026-10-19-materials/glass-light.png)
 
 ## 开发与历史方案
 
@@ -43,7 +43,8 @@ Ctrl + Tab 由主文档直接处理完整的按下/松开事件，不通过宿�
 npm run dev
 ```
 
-- 设计基线：`http://127.0.0.1:4382/`
+- 历史 05 设计基线：`http://127.0.0.1:4382/`
+- 保留的材质对照：`http://127.0.0.1:4382/demo/materials/?material=glass&theme=dark`
 - 正式界面代码的样例验证：`http://127.0.0.1:4382/demo/plugin.html`
 
 样例页使用正式的视图和动画模块，但数据是 fixtures；它不能代替原生 DSH 验证。原生接入与验证记录见 [design/integration.md](design/integration.md)。

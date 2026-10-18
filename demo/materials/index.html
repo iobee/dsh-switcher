@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DSH Switcher · 材质对照</title>
+  <link rel="stylesheet" href="../../design/archive/session-material-05/switcher.css">
+  <link rel="stylesheet" href="surfaces.css">
+  <link rel="stylesheet" href="preview.css">
+</head>
+<body data-theme="dark" data-material="mist">
+  <div class="host-context" aria-hidden="true">
+    <img class="context-light" src="reference/context-light.png" alt="">
+    <img class="context-dark" src="reference/context-dark.png" alt="">
+  </div>
+  <div class="preview-caption">DSH 实际截图背景 <span>·</span> 材质预览</div>
+  <div id="mount"></div>
+  <div class="controls">
+    <nav aria-label="材质方案">
+      <button data-material="baseline" aria-pressed="false">原版</button>
+      <button data-material="mist" aria-pressed="true">A 雾面</button>
+      <button data-material="glass" aria-pressed="false">B 轻透</button>
+      <button data-material="soft" aria-pressed="false">C 柔光</button>
+    </nav>
+    <span class="divider" aria-hidden="true"></span>
+    <nav aria-label="预览主题">
+      <button data-theme="light" aria-pressed="false">亮色</button>
+      <button data-theme="dark" aria-pressed="true">暗色</button>
+    </nav>
+    <span class="divider" aria-hidden="true"></span>
+    <button id="reopen" title="重新打开切换器">打开</button>
+    <button id="compare" aria-pressed="false" title="按住看原版，松开回到当前材质">按住对比</button>
+  </div>
+  <p class="material-note" id="material-note" aria-live="polite"></p>
+  <script type="module" src="preview.js"></script>
+</body>
+</html>
