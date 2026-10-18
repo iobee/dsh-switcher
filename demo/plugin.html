@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DSH Switcher · 插件界面验证</title>
+<link rel="stylesheet" href="../src/plugin/switcher.css">
+<style>
+body { margin:0; font:14px/1.6 -apple-system, sans-serif; background:#f8f9fa; color:#363a40; } body[data-theme=dark] { background:#18191b; color:#e0e2e5; }
+aside { position:fixed; inset:0 auto 0 0; width:228px; padding:24px; box-sizing:border-box; background:#99999912; }
+main { margin:80px 50px 0 280px; max-width:740px; } h1 { font-size:26px; } p { color:#888; } button, textarea { font:inherit; } button { margin:4px; padding:7px 12px; } textarea { width:100%; height:100px; }
+nav { position:fixed; bottom:24px; left:50%; transform:translateX(-50%); white-space:nowrap; z-index:10001; }
+@media(max-width:650px) { aside { width:150px; } main { margin-left:175px; margin-right:16px; } }
+</style></head><body><aside>工作区<br><br>dshMagicShortcuts<br>打磨键盘导航体验<br><br>SharkSwitcher<br>节点稳定性与切换策略</aside>
+<main><h1>先把日常操作串起来</h1><p>这里使用正式插件的界面和动效代码，数据为验证样例。</p><p id="current">当前：打磨键盘导航体验</p><textarea aria-label="测试草稿" placeholder="可输入草稿，再测试取消与焦点恢复"></textarea></main>
+<nav><button id="show">体验切换</button><button id="light">亮色</button><button id="dark">暗色</button><button id="state">改变运行状态</button><button id="dispose">卸载界面</button></nav><div id="mount"></div>
+<script type="module" src="plugin-demo.js"></script></body></html>
