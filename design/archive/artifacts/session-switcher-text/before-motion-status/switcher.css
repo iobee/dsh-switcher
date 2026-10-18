@@ -1,0 +1,75 @@
+.lab { z-index: 80; }
+.lab #hint-toggle, .lab #guide-toggle { display: none; }
+.lab-tools .mru-launch { background: var(--candidate); color: var(--text); padding: 6px 10px; }
+.lab-tools .mru-baseline { font-size: 11px; color: var(--secondary); text-decoration: none; white-space: nowrap; padding: 5px 8px; border-right: 1px solid var(--line-strong); }
+.lab-tools .mru-baseline:hover { color: var(--text); }
+.lab-tools #mru-material { border: 1px solid var(--line); padding: 4px 8px; border-radius: 5px; }
+.lab-tools #mru-material[aria-pressed=true] { background: var(--selected); color: var(--text); }
+/* One material surface. Selection never changes geometry or type size. */
+.mru-backdrop {
+  --mru-tint: rgb(35 36 39 / .72); --mru-opaque: #27282b; --mru-border: rgb(255 255 255 / .16);
+  --mru-selected: rgb(202 217 240 / .075); --mru-selected-border: rgb(179 202 237 / .40);
+  --mru-primary: #e7e8ec; --mru-secondary: #afb1b8;
+  position: fixed; inset: 44px 0 32px; z-index: 60; background: rgb(0 0 0 / .08);
+  display: grid; place-items: center; font-family: var(--dsw-font-family, var(--font));
+}
+.mru-panel {
+  width: min(820px, calc(100vw - 32px)); padding: 8px; border: 1px solid var(--mru-border); border-radius: 14px;
+  background: var(--mru-opaque); box-shadow: 0 16px 48px #0004, 0 2px 6px #0002, inset 0 1px rgb(255 255 255 / .035);
+  transform: translateY(-12px);
+}
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .mru-panel { background: var(--mru-tint); -webkit-backdrop-filter: blur(40px) saturate(150%); backdrop-filter: var(--dsw-menu-backdrop-filter, blur(40px) saturate(150%)); }
+}
+.mru-backdrop[data-material=solid] .mru-panel { background: var(--mru-opaque); -webkit-backdrop-filter: none; backdrop-filter: none; }
+.mru-list { display: flex; gap: 4px; align-items: stretch; padding: 0; margin: 0; list-style: none; outline: none; overflow-x: auto; overscroll-behavior: contain; scrollbar-width: none; }
+.mru-list::-webkit-scrollbar { display: none; }
+.mru-row { flex: 1 0 142px; min-width: 0; height: 152px; padding: 10px 10px 8px; position: relative; display: flex; flex-direction: column; background: transparent; border: 1px solid transparent; border-radius: 8px; cursor: pointer; transition: background-color 100ms, border-color 100ms; }
+.mru-row::after { content: ''; position: absolute; width: 1px; right: -3px; top: 11px; bottom: 11px; background: var(--mru-border); opacity: .4; }
+.mru-row:last-child::after, .mru-row[aria-selected=true]::after, .mru-row:has(+ [aria-selected=true])::after { opacity: 0; }
+.mru-row[aria-selected=true] { background: var(--mru-selected); border-color: var(--mru-selected-border); }
+.mru-row:not([aria-selected=true]):hover { background: var(--hover); }
+.mru-page-top { display: flex; align-items: center; justify-content: space-between; gap: 5px; height: 15px; flex: none; }
+.mru-status { font-size: 10px; line-height: 15px; display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; color: var(--mru-secondary); }
+.mru-status i { width: 4px; height: 4px; border-radius: 50%; background: currentColor; flex: none; }
+.mru-status.running { color: #afc6ee; }
+.mru-status.waiting { color: #d5b789; }
+.mru-current { color: var(--mru-secondary); font-size: 10px; line-height: 15px; }
+.mru-page-body { min-height: 0; flex: 1; padding-top: 8px; overflow: hidden; }
+.mru-source-label { display: none; }
+.mru-excerpt { font: 400 13px/20px var(--dsw-font-family, var(--font)); color: var(--mru-primary); overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; white-space: pre-wrap; overflow-wrap: anywhere; }
+.mru-code-fragment { font: inherit; display: inline; background: none; padding: 0; border: 0; color: inherit; white-space: pre-wrap; overflow-wrap: anywhere; }
+.mru-excerpt.mru-code { font-family: var(--code); font-size: 11px; line-height: 18px; }
+.mru-page-bottom { margin-top: 8px; flex: none; }
+.mru-title { color: var(--mru-secondary); font-size: 11px; font-weight: 400; line-height: 16px; min-height: 32px; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+.mru-row[data-source-kind=draft] .mru-source-label { display: block; font-size: 10px; line-height: 14px; color: var(--mru-secondary); margin-bottom: 4px; }
+.mru-row[data-source-kind=title] .mru-excerpt { font-size: 13px; font-weight: 500; line-height: 20px; }
+.mru-row[data-source-kind=title] .mru-page-bottom { display: none; }
+.mru-note { position: fixed; bottom: 47px; left: 50%; transform: translateX(-50%); z-index: 50; padding: 8px 13px; border-radius: 8px; color: var(--secondary); background: var(--panel); border: 1px solid var(--line); font-size: 11px; max-width: calc(100vw - 32px); text-align: center; pointer-events: none; }
+body[data-mru-open=true] .focus-arrival::before, body[data-mru-open=true] .focus-arrival::after, body[data-mru-open=true] .workspace::after { opacity: 0 !important; }
+[data-theme=light] .mru-backdrop {
+  --mru-tint: rgb(250 250 252 / .76); --mru-opaque: #f8f8fa; --mru-border: rgb(32 38 51 / .14);
+  --mru-selected: rgb(74 99 144 / .065); --mru-selected-border: rgb(85 112 158 / .38);
+  --mru-primary: #282b32; --mru-secondary: #686c75; background: rgb(25 30 40 / .045);
+}
+[data-theme=light] .mru-panel { box-shadow: 0 16px 48px #1f283322, 0 2px 6px #1f28330a, inset 0 1px #ffffff80; }
+[data-theme=light] .mru-status.running { color: #4c6c9f; }
+[data-theme=light] .mru-status.waiting { color: #8a652d; }
+@media (max-width: 850px) {
+  .lab { padding: 0 10px; gap: 6px; }
+  .lab-title, .lab-tools #reset .label { display: none; }
+  .lab-badge { border: 0; padding: 0; }
+  .lab-tools { gap: 3px; }
+}
+@media (max-width: 760px) { .mru-row { flex: 0 0 152px; } }
+@media (max-width: 600px) {
+  .lab-badge, .lab-tools #mru-quick { display: none; }
+  .mru-panel { width: calc(100vw - 24px); padding: 6px; }
+}
+@media (max-height: 420px) { .mru-panel { transform: none; max-height: calc(100dvh - 145px); overflow: auto; } }
+@media (prefers-reduced-transparency: reduce) { .mru-panel { background: var(--mru-opaque); -webkit-backdrop-filter: none; backdrop-filter: none; } }
+@media (prefers-contrast: more) {
+  .mru-backdrop, [data-theme] .mru-backdrop { --mru-secondary: var(--text); --mru-border: var(--secondary); --mru-selected-border: var(--blue); }
+  .mru-panel { background: var(--mru-opaque); -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
+@media (prefers-reduced-motion: reduce) { .mru-row { transition: none; } }

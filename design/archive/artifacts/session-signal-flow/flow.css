@@ -1,0 +1,14 @@
+/* These controls belong to the study, outside the unchanged switcher surface. */
+.flow-picker { position: fixed; top: 78px; left: 50%; transform: translateX(-50%); z-index: 88; width: max-content; max-width: calc(100vw - 24px); --flow-blue: #a6bddc; }
+.flow-options { display: flex; align-items: center; gap: 3px; padding: 4px; border: 1px solid var(--line-strong); border-radius: 10px; background: var(--panel); box-shadow: 0 3px 12px #0000000a; }
+.flow-choice { display: flex; align-items: center; justify-content: center; gap: 7px; padding: 7px 13px; min-width: 94px; border-radius: 6px; color: var(--secondary); font: 11px/18px var(--font); transition: background-color 120ms, color 120ms; }
+.flow-choice[aria-pressed=true] { background: var(--hover); color: var(--text); }
+.flow-choice:focus-visible { outline: 1px solid var(--flow-blue); outline-offset: -1px; }
+.flow-icon { width: 20px; height: 20px; display: flex; }
+.flow-icon .signal-mark { color: var(--flow-blue); }
+.flow-label { white-space: nowrap; }
+.flow-description { text-align: center; margin-top: 11px; color: var(--muted); font: 11px/16px var(--font); }
+[data-theme=light] .flow-picker { --flow-blue: #55749c; }
+@media (max-width: 560px) { .flow-picker { top: 64px; } .flow-choice { min-width: 70px; padding: 6px 7px; gap: 4px; } }
+@media (max-height: 520px) { .flow-picker { top: 54px; } .flow-choice { padding-top: 3px; padding-bottom: 3px; } .flow-description { display: none; } }
+@media (prefers-reduced-motion: reduce) { .flow-choice { transition: none; } }

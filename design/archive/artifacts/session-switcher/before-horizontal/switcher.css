@@ -1,0 +1,53 @@
+.lab { z-index: 80; }
+.lab #hint-toggle, .lab #guide-toggle { display: none; }
+.lab-tools .mru-launch { background: var(--candidate); color: var(--text); padding: 6px 10px; }
+.mru-backdrop { position: fixed; inset: 44px 0 32px; z-index: 60; background: rgb(0 0 0 / .19); display: grid; place-items: center; }
+.mru-panel { width: min(520px, calc(100vw - 40px)); background: var(--raised); border: 1px solid var(--line-strong); border-radius: 16px; box-shadow: 0 24px 90px rgb(0 0 0 / .32), 0 2px 8px rgb(0 0 0 / .12); overflow: hidden; transform: translateY(-28px); }
+.mru-heading { display: flex; align-items: center; justify-content: space-between; padding: 19px 21px 13px; }
+.mru-heading h2 { font-size: 13px; font-weight: 550; }
+.mru-count { font-size: 11px; color: var(--secondary); font-variant-numeric: tabular-nums; }
+.mru-list { margin: 0 8px 8px; padding: 0; outline: none; list-style: none; }
+.mru-row { padding: 13px 13px; display: flex; gap: 13px; align-items: center; border-radius: 9px; min-height: 67px; cursor: pointer; border: 1px solid transparent; }
+.mru-row[aria-selected=true] { background: #91b4ef1b; border-color: #a6c6fb35; }
+.mru-row .mru-glyph { width: 30px; height: 32px; border-radius: 7px; display: grid; place-items: center; flex: none; color: var(--secondary); background: var(--hover); }
+.mru-row[aria-selected=true] .mru-glyph { color: var(--blue); background: #92b7f219; }
+.mru-row[aria-selected=true] .mru-title { color: var(--text); }
+.mru-copy { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 5px; }
+.mru-title { font-size: 13px; font-weight: 450; color: var(--secondary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; line-height: 1.35; }
+.mru-project { font-size: 11px; color: var(--secondary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mru-status { margin-left: 8px; font-size: 10px; display: flex; align-items: center; gap: 5px; white-space: nowrap; color: var(--secondary); }
+.mru-status.running { color: var(--blue); }
+.mru-status.waiting { color: #e5b976; }
+.mru-status i { display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+.mru-foot { border-top: 1px solid var(--line); padding: 13px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; color: var(--secondary); font-size: 11px; }
+.mru-foot span { display: inline-flex; align-items: center; gap: 5px; }
+.mru-foot kbd { font-size: 10px; line-height: 17px; background: transparent; }
+.mru-demo { position: fixed; bottom: 53px; z-index: 81; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 8px; border: 1px solid var(--line-strong); border-radius: 10px; background: var(--panel); padding: 8px 10px; box-shadow: 0 6px 22px #0002; white-space: nowrap; }
+.mru-demo small { font-size: 10px; color: var(--secondary); margin: 0 7px 0 3px; }
+.mru-demo button { padding: 6px 9px; font-size: 11px; border-radius: 5px; background: var(--hover); }
+.mru-demo button[data-step=commit] { background: var(--candidate); }
+.mru-note { position: fixed; bottom: 47px; left: 50%; transform: translateX(-50%); z-index: 50; padding: 8px 13px; border-radius: 8px; color: var(--secondary); background: var(--panel); border: 1px solid var(--line); font-size: 11px; max-width: calc(100vw - 32px); text-align: center; pointer-events: none; }
+body[data-mru-open=true] .focus-arrival::before,
+body[data-mru-open=true] .focus-arrival::after,
+body[data-mru-open=true] .workspace::after { opacity: 0 !important; }
+[data-theme=light] .mru-backdrop { background: rgb(24 30 42 / .10); }
+[data-theme=light] .mru-panel { box-shadow: 0 24px 80px rgb(28 36 49 / .20), 0 2px 8px rgb(28 36 49 / .06); }
+[data-theme=light] .mru-row[aria-selected=true] { background: #eaf0fa; border-color: #d5e0f1; }
+[data-theme=light] .mru-status.waiting { color: #8c5c17; }
+@media (max-width: 650px) {
+ .lab { gap: 7px; padding: 0 10px; }
+ .lab-title { display: none; }
+ .lab-badge { border: 0; padding: 0; }
+ .lab-tools { gap: 3px; }
+ .lab-tools #reset .label { display: none; }
+ .mru-panel { transform: translateY(-14px); }
+ .mru-demo { max-width: calc(100vw - 24px); gap: 4px; padding: 7px; }
+ .mru-demo small { display: none; }
+ .mru-foot { padding: 12px 16px; }
+ .mru-status { margin-left: 2px; }
+}
+@media (max-height: 650px) {
+ .mru-panel { transform: none; max-height: calc(100dvh - 160px); overflow: auto; }
+ .mru-row { min-height: 51px; padding: 8px 12px; }
+ .mru-heading { padding-top: 12px; }
+}

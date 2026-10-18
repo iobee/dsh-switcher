@@ -1,0 +1,11 @@
+/* Use the existing space between the excerpt and title. The card stays 128px. */
+.signal-body { padding-top: 2px; }
+.signal-runway { height: 14px; flex: 0 0 14px; display: flex; align-items: center; justify-content: center; }
+.signal-symbol { width: 56px; height: 14px; margin: 0; }
+.signal-mark { width: 56px; height: 14px; overflow: hidden; }
+.signal-mark circle { fill: currentColor; }
+.signal-foot { margin-top: 0; }
+.signal-title { width: 100%; }
+/* Only the running state is under review in this prototype. */
+#signal-quick, .signal-control label, .signal-control .control-divider, #signal-play { display: none; }
+.signal-control { gap: 4px; }

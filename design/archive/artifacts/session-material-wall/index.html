@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DSH · 24 款卡片方向</title>
+  <script>document.documentElement.dataset.theme=new URLSearchParams(location.search).get('theme')==='dark'?'dark':'light';</script>
+  <link rel="stylesheet" href="signal.css"><link rel="stylesheet" href="native.css">
+  <link rel="stylesheet" href="fivebeat.css"><link rel="stylesheet" href="dia-layout.css">
+  <link rel="stylesheet" href="surfaces.css"><link rel="stylesheet" href="explorations.css"><link rel="stylesheet" href="wall.css?v=2"><link rel="stylesheet" href="likes.css?v=1">
+</head>
+<body>
+  <header class="wall-header"><div><h1>卡片方向 <span>24</span></h1><p>A 的延伸，以及更远的尝试。</p></div><nav aria-label="原型工具"><a href="../session-fivebeat-materials/index.html?surface=porcelain">原来的 A / B / C</a><a href="../session-design-archive/index.html">存档</a><button id="freeze" aria-pressed="false">暂停动效</button><button id="theme">深色</button></nav></header>
+  <section class="context" aria-label="选中方向的完整预览">
+    <div class="context-stage"><div id="context-surface" class="signal-overlay material-surface context-surface" data-material-id="01"><div class="signal-panel"><ul id="context-list" class="signal-list" role="listbox" tabindex="0" aria-label="会话预览"></ul></div></div></div>
+    <div class="context-meta"><div><strong id="chosen-name"></strong><span id="chosen-note"></span></div><div class="context-actions"><span id="current-like"></span><button type="button" data-show-liked>喜欢 · <span data-like-count>0</span></button><a id="full-preview" href="preview.html?material=01&theme=light">完整试用 <span aria-hidden="true">↗</span></a></div></div>
+  </section>
+  <main>
+    <div class="wall-tools"><nav class="view-tabs" aria-label="筛选方向"><button id="view-all" type="button" aria-pressed="true">全部 <span>24</span></button><button id="view-liked" type="button" aria-pressed="false">喜欢 <span data-like-count>0</span></button></nav><nav class="group-jumps" aria-label="方向分组"><a href="#near-heading">A 的延伸 · 10</a><a href="#far-heading">不同方向 · 14</a></nav><button id="selection" aria-pressed="false">展示选中态</button></div>
+    <section class="concept-group" aria-labelledby="near-heading"><div class="group-heading"><h2 id="near-heading">01 — 10 <span>A 的延伸</span></h2><p>保留柔白、轻盈和层次，细调轮廓与表面。</p></div><div id="near-wall" class="material-grid"></div></section>
+    <section class="concept-group" aria-labelledby="far-heading"><div class="group-heading"><h2 id="far-heading">11 — 24 <span>不同方向</span></h2><p>换一种组织方式：整片、气泡、索引、书页、深墨……</p></div><div id="far-wall" class="material-grid"></div></section>
+    <section id="liked-section" aria-label="喜欢的方向对比" hidden><div class="liked-intro"><h2>喜欢的方向</h2><p>完整浮层放在一起，点同一会话比较选中效果。</p></div><div id="liked-list"></div><div id="likes-empty" class="likes-empty" hidden><p>还没有喜欢的方向</p><p>在卡片右上角点 Like，喜欢的就会收在这里。</p><button type="button" data-show-all>去挑几款</button></div></section>
+    <footer class="wall-footer">保留 11 号「五拍」动效 · 使用相同的示例会话 · 01 为原 A</footer>
+  </main>
+  <p id="like-feedback" class="sr-only" role="status" aria-live="polite"></p>
+  <script src="concepts.js"></script><script src="likes.js?v=1"></script><script src="fivebeat-motion.js"></script><script src="wall.js?v=2"></script>
+</body>
+</html>

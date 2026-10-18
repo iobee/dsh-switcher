@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DSH · 动态图标墙</title>
+  <link rel="stylesheet" href="wall.css">
+  <script src="motion.js" defer></script>
+  <script src="wall.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <span class="brand">DSH <span>/</span> 图标实验</span>
+    <nav aria-label="保留的设计"><a href="../session-signal/index.html">旧图标版 ↗</a><a href="../session-icon-refined/index.html">上一版 ↗</a></nav>
+  </header>
+  <main>
+    <section class="wall-heading">
+      <div><h1>一面动态图标墙。</h1><p>24 个方向，20px 实际尺寸。点一个，放回会话里看看。</p></div>
+      <div class="utilities"><button id="mono" aria-pressed="false">单色</button><button id="freeze" aria-pressed="false">暂停</button><button id="theme" aria-label="切换到浅色">浅色</button></div>
+    </section>
+    <div class="wall-toolbar">
+      <div class="state-tabs" role="group" aria-label="整面图标的状态"><button data-state="running" aria-pressed="true">运行中</button><button data-state="approval" aria-pressed="false">等待确认</button><button data-state="unread" aria-pressed="false">新结果</button><button data-state="draft" aria-pressed="false">草稿</button></div>
+      <span class="wall-count">01 为旧版参照</span>
+    </div>
+    <section class="icon-wall" aria-label="选择图标方向" id="icon-wall"></section>
+    <section class="context" aria-label="会话内的实际效果">
+      <div class="context-heading"><div><span id="chosen-name">01 · 三段弧</span><span class="context-hint">放回会话里</span></div><span class="context-size">20px · 同一套图形的不同状态</span></div>
+      <div class="context-stage">
+        <div class="session-panel">
+          <article class="session-card" data-preview-state="draft"><div class="excerpt">想把高频操作连起来，尽量让双手留在键盘上。</div><div class="title-row"><span class="preview-icon" aria-label="有草稿"></span><span class="session-title">打磨键盘导航体验</span></div></article>
+          <article class="session-card selected" data-preview-state="running"><div class="excerpt">延迟很低但只稳定一小会儿的节点，不要急着切过去。</div><div class="title-row"><span class="preview-icon" aria-label="运行中"></span><span class="session-title">节点稳定性与切换策略</span></div></article>
+          <article class="session-card" data-preview-state="idle"><div class="excerpt">上下移动的时候，先不要直接切换会话。</div><div class="title-row"><span class="preview-icon" aria-label="静置"></span><span class="session-title">左侧栏的焦点与候选状态</span></div></article>
+          <article class="session-card" data-preview-state="approval"><div class="excerpt">把插件的接入边界梳理一下。</div><div class="title-row"><span class="preview-icon" aria-label="等待用户确认"></span><span class="session-title">DSH 插件接入方案</span></div></article>
+          <article class="session-card" data-preview-state="unread"><div class="excerpt">打开就能写，历史记录也要容易找到。</div><div class="title-row"><span class="preview-icon" aria-label="有新结果"></span><span class="session-title">一念 · 快速记录交互</span></div></article>
+        </div>
+      </div>
+      <div class="context-foot"><span id="chosen-note">三段短弧伸展、收拢，沿同一轮廓流动。</span><span>设计样本 · 非实时会话</span></div>
+    </section>
+  </main>
+  <script>document.documentElement.dataset.theme = new URLSearchParams(location.search).get('theme') === 'light' ? 'light' : 'dark';</script>
+</body>
+</html>

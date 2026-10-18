@@ -1,0 +1,8 @@
+/* The selected wall icon keeps its actual 20px slot and muted colour. */
+.signal-overlay, .signal-control { --signal-blue: #a6bddc; --signal-amber: #d0b78f; }
+[data-theme=light] .signal-overlay, [data-theme=light] .signal-control { --signal-blue: #55749c; --signal-amber: #967747; }
+.signal-foot { height: 20px; min-height: 20px; margin-top: 10px; gap: 4px; }
+.signal-symbol, .signal-mark, .demo-symbol { width: 20px; height: 20px; }
+.signal-mark path { fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; }
+.signal-mark .signal-draft { color: var(--signal-muted); }
+.signal-card[data-status=unread] .signal-mark { color: var(--signal-blue); }

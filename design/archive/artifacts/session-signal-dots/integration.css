@@ -1,0 +1,36 @@
+/* The signal spans the text column instead of sitting in a separate capsule. */
+.signal-runway { position: relative; }
+.signal-symbol {
+  width: 100%; height: 18px; margin: 0;
+  background: none; border-radius: 0; box-shadow: none;
+  pointer-events: none;
+}
+.signal-mark { width: 100%; height: 18px; overflow: hidden; }
+.signal-mark line { stroke: currentColor; stroke-linecap: round; }
+.signal-mark ellipse { fill: currentColor; }
+.signal-runway::before {
+  content: ''; position: absolute; height: 1px; left: 0; right: 0; top: 8.5px;
+  background: linear-gradient(90deg, transparent, currentColor 14%, currentColor 86%, transparent);
+  color: var(--signal-muted); opacity: 0; pointer-events: none;
+}
+[data-integration=line] .signal-runway::before { opacity: .13; }
+/* Comparison tools sit outside the product surface. */
+.integration-picker {
+  position: fixed; top: 73px; left: 50%; transform: translateX(-50%);
+  z-index: 88; max-width: calc(100vw - 24px); width: max-content;
+}
+.integration-options {
+  display: flex; gap: 3px; padding: 4px;
+  border: 1px solid var(--line-strong); border-radius: 9px;
+  background: var(--panel); box-shadow: 0 3px 12px #00000008;
+}
+.integration-choice {
+  padding: 6px 14px; min-width: 88px; border-radius: 5px;
+  font: 11px/18px var(--font); color: var(--secondary); white-space: nowrap;
+}
+.integration-choice[aria-pressed=true] { color: var(--text); background: var(--selected); }
+.integration-choice:focus-visible { outline: 1px solid var(--secondary); outline-offset: -1px; }
+.integration-description { margin-top: 10px; text-align: center; font: 11px/17px var(--font); color: var(--muted); }
+@media(max-height:520px) { .integration-picker { top: 52px; } .integration-description { display: none; } .integration-choice { padding-block: 3px; } }
+@media(max-width:560px) { .integration-choice { padding-inline: 10px; min-width: 82px; } }
+@media(prefers-contrast:more) { [data-integration=line] .signal-runway::before { opacity: .3; } }

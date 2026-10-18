@@ -1,0 +1,22 @@
+/* Keep the Dia proportions; dissolve the nested preview rectangle. */
+.signal-overlay {
+  --soft-glow: radial-gradient(ellipse 82% 72% at 50% 24%, rgb(255 255 255 / .026), rgb(255 255 255 / .01) 42%, transparent 78%);
+}
+[data-theme=light] .signal-overlay {
+  --soft-glow: radial-gradient(ellipse 82% 72% at 50% 24%, rgb(255 255 255 / .28), rgb(255 255 255 / .10) 42%, transparent 78%);
+}
+.signal-card,
+.signal-card[aria-selected=true] {
+  background-image: var(--soft-glow);
+}
+.signal-body {
+  background: transparent;
+  border-color: transparent;
+}
+@media(prefers-reduced-transparency:reduce) {
+  .signal-body { background: transparent; }
+  .signal-card, .signal-card[aria-selected=true] { background-image: none; }
+}
+@media(prefers-contrast:more) {
+  .signal-card, .signal-card[aria-selected=true] { background-image: none; }
+}

@@ -1,0 +1,11 @@
+/* Same 05 geometry and light appearance. Only its dark elevation changes. */
+[data-theme=dark] .material-surface[data-material-id="05"][data-refinement=raised]{
+  --study-fill:#3c3e42;
+  --study-edge:rgb(255 255 255 / .045);
+  --study-shadow:0 1px 2px rgb(0 0 0 / .22),0 3px 7px rgb(0 0 0 / .15);
+}
+.pairing-dock{position:fixed;top:57px;left:50%;transform:translateX(-50%);z-index:91;display:flex;gap:2px;padding:3px;background:var(--panel);border:1px solid var(--line);border-radius:8px;font-size:11px;white-space:nowrap}
+.pairing-dock button{font-size:11px;line-height:18px;padding:5px 10px;border-radius:5px;color:var(--secondary)}
+.pairing-dock button[aria-pressed=true]{background:var(--selected);color:var(--text)}
+.pairing-dock button:hover{background:var(--hover)}
+.pairing-dock button:focus-visible{outline:1px solid var(--blue);outline-offset:1px}

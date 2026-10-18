@@ -1,0 +1,68 @@
+.lab { z-index: 90; }
+.lab #hint-toggle, .lab #guide-toggle, .lab-badge { display: none; }
+.lab-title { font-weight: 500; }
+.lab-tools { gap: 4px; }
+.lab-tools .signal-tools { display: contents; }
+.lab-tools .signal-tools button, .lab-tools .signal-tools a { font-size: 11px; color: var(--secondary); padding: 5px 9px; border-radius: 5px; text-decoration: none; white-space: nowrap; }
+.lab-tools .signal-tools button[aria-pressed=true] { background: var(--selected); color: var(--text); }
+.lab-tools .signal-tools .signal-launch { background: var(--selected); color: var(--text); }
+.signal-overlay {
+  --signal-tint: rgb(40 40 42 / .76); --signal-opaque: #29292b;
+  --signal-edge: rgb(255 255 255 / .14); --signal-ink: #e8e8eb;
+  --signal-muted: #a6a6ae; --signal-blue: #a6bddc; --signal-amber: #d0b78f;
+  --signal-faint: #96969e;
+  position: fixed; inset: 44px 0 32px; z-index: 65; display: grid; place-items: center;
+  background: rgb(0 0 0 / .055); color: var(--signal-ink); font-family: var(--font);
+}
+.signal-panel {
+  width: min(820px, calc(100vw - 32px)); padding: 7px; border-radius: 14px;
+  border: 1px solid var(--signal-edge); background: var(--signal-opaque);
+  box-shadow: 0 16px 48px #0003, 0 2px 6px #0002, inset 0 1px rgb(255 255 255 / .035);
+  transform: translateY(-16px);
+}
+@supports (backdrop-filter: blur(1px)) {
+  .signal-panel { background: var(--signal-tint); backdrop-filter: blur(40px) saturate(135%); -webkit-backdrop-filter: blur(40px) saturate(135%); }
+}
+.signal-overlay[data-material=solid] .signal-panel { background: var(--signal-opaque); backdrop-filter: none; }
+.signal-list { display: flex; align-items: stretch; gap: 4px; padding: 0; margin: 0; list-style: none; outline: none; overflow-x: auto; scrollbar-width: none; overscroll-behavior: contain; }
+.signal-list::-webkit-scrollbar { display: none; }
+.signal-card { position: relative; flex: 1 0 142px; min-width: 0; height: 128px; padding: 8px 11px 9px; border: 1px solid transparent; border-radius: 8px; display: flex; flex-direction: column; cursor: pointer; transition: background-color 110ms; }
+.signal-card::after { content: ''; position: absolute; right: -3px; top: 12px; bottom: 12px; width: 1px; background: var(--signal-edge); opacity: .36; }
+.signal-card:last-child::after, .signal-card[aria-selected=true]::after, .signal-card:has(+ [aria-selected=true])::after { opacity: 0; }
+.signal-card[aria-selected=true] { background: var(--hover); }
+.signal-symbol { width: 20px; height: 20px; flex: none; display: flex; align-items: center; margin-top: -2px; margin-left: -3px; }
+.signal-mark { width: 20px; height: 20px; flex: none; overflow: visible; color: var(--signal-faint); transition: color 300ms; }
+.signal-card[data-status=running] .signal-mark, .signal-card[data-status=unread] .signal-mark { color: var(--signal-blue); }
+.signal-card[data-status=approval] .signal-mark, .signal-card[data-status=question] .signal-mark, .signal-card[data-status=plan] .signal-mark { color: var(--signal-amber); }
+.signal-mark path { fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; }
+.signal-mark .signal-draft { color: var(--signal-muted); }
+.signal-body { flex: 1; min-height: 0; padding-top: 4px; overflow: hidden; }
+.signal-excerpt { color: var(--signal-ink); font-size: 13px; font-weight: 400; line-height: 20px; white-space: pre-wrap; overflow-wrap: anywhere; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
+.signal-excerpt code { padding: 0; background: none; font: 11px/18px var(--code); }
+.signal-foot { min-height: 32px; margin-top: 8px; flex: none; display: flex; align-items: flex-start; gap: 3px; }
+.signal-title { flex: 1; min-width: 0; color: var(--signal-muted); font-size: 11px; font-weight: 400; line-height: 16px; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+.signal-note { position: fixed; z-index: 75; bottom: 49px; left: 50%; transform: translateX(-50%); color: var(--secondary); font-size: 11px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }
+body[data-mru-open=true] .focus-arrival::before, body[data-mru-open=true] .focus-arrival::after, body[data-mru-open=true] .workspace::after { opacity: 0 !important; }
+.signal-control { position: fixed; z-index: 85; bottom: 52px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 5px; padding: 7px; border-radius: 10px; border: 1px solid var(--line-strong); background: var(--panel); color: var(--secondary); box-shadow: 0 5px 20px #0001; font-size: 11px; white-space: nowrap; }
+.signal-control > span { font-size: 10px; color: var(--muted); padding: 0 6px; }
+.signal-control button { padding: 5px 8px; font-size: 11px; border-radius: 5px; color: var(--secondary); }
+.signal-control button[aria-pressed=true] { background: var(--selected); color: var(--text); }
+.signal-control .control-divider { width: 1px; height: 14px; background: var(--line-strong); margin: 0 3px; }
+.signal-control label { display: flex; align-items: center; gap: 5px; padding: 0 6px; }
+.signal-control input { margin: 0; width: 12px; height: 12px; accent-color: var(--blue); }
+.signal-control .control-play { margin-left: 3px; background: var(--selected); color: var(--text); }
+.signal-control .control-play svg { width: 10px; height: 10px; vertical-align: -1px; margin-right: 4px; fill: currentColor; }
+[data-theme=light] .signal-overlay {
+  --signal-tint: rgb(250 250 252 / .80); --signal-opaque: #f8f8fa;
+  --signal-edge: rgb(35 39 49 / .13); --signal-ink: #2c2e34; --signal-muted: #6b6e77;
+  --signal-blue: #55749c; --signal-amber: #967747; --signal-faint: #82858d;
+  background: rgb(25 30 40 / .025);
+}
+[data-theme=light] .signal-panel { box-shadow: 0 16px 48px #1f28331a, 0 2px 6px #1f283308, inset 0 1px #ffffff90; }
+@media (max-width: 1040px) { .lab-title { display: none; } }
+@media (max-width: 760px) { .signal-card { flex: 0 0 152px; } .signal-control { gap: 0; } .signal-control > span { display: none; } .signal-control button { padding: 5px 6px; font-size: 10px; } .lab-tools .signal-tools a, .lab-tools #signal-material { display: none; } }
+@media (max-width: 560px) { .signal-control { max-width: calc(100vw - 24px); flex-wrap: wrap; justify-content: center; } .signal-control .control-divider { display: none; } .signal-control label { font-size: 10px; } }
+@media (max-height: 450px) { .signal-panel { transform: translateY(-22px); } .signal-control { bottom: 36px; } }
+@media (prefers-reduced-motion: reduce) { .signal-mark, .signal-card { transition: none; } }
+@media (prefers-reduced-transparency: reduce) { .signal-panel { background: var(--signal-opaque); backdrop-filter: none; } }
+@media (prefers-contrast: more) { .signal-overlay, [data-theme=light] .signal-overlay { --signal-muted: var(--text); --signal-edge: var(--secondary); } .signal-panel { background: var(--signal-opaque); backdrop-filter: none; } .signal-card[aria-selected=true] { outline: 1px solid var(--signal-blue); outline-offset: -1px; } }

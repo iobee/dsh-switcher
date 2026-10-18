@@ -1,0 +1,59 @@
+/* Native Dia capture: 1884 × 380 physical pixels at 2× = 942 × 190 pt.
+   The previous estimated layout remains available with ?size=compact. */
+html[data-layout=dia] .signal-panel {
+  width: min(942px, calc(100vw - 32px));
+  padding: 15px;
+  border-radius: 24px;
+  transform: none;
+}
+html[data-layout=dia] .signal-list { gap: 0; }
+html[data-layout=dia] .signal-card {
+  flex: 0 0 182px;
+  height: 158px;
+  padding: 11px;
+  border-radius: 14px;
+}
+html[data-layout=dia] .signal-body {
+  flex-basis: 106px;
+  min-height: 106px;
+  padding: 10px;
+}
+html[data-layout=dia] .signal-excerpt {
+  font-size: 14px;
+  line-height: 20px;
+}
+html[data-layout=dia] .signal-excerpt code { font-size: 12px; line-height: 20px; }
+html[data-layout=dia] .signal-foot {
+  height: 16px;
+  min-height: 16px;
+  margin: 12px 0 0;
+  gap: 4px;
+}
+html[data-layout=dia] .signal-symbol { margin: 0 0 0 -2px; }
+html[data-layout=dia] .signal-title { font-size: 14px; line-height: 16px; }
+html[data-layout=dia] .pair-stage { min-height: 234px; }
+
+/* Review controls stay outside the switcher. */
+.layout-picker {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  width: min(980px, calc(100% - 48px));
+  margin: -8px auto 22px;
+  font-size: 11px;
+}
+.layout-picker button {
+  padding: 5px 10px;
+  border-radius: 6px;
+  font: inherit;
+  color: var(--secondary);
+}
+.layout-picker button[aria-pressed=true] { background: var(--selected); color: var(--text); }
+.layout-picker button:hover { background: var(--hover); }
+.layout-picker button:focus-visible { outline: 1px solid var(--blue); outline-offset: 1px; }
+.pairing-dock .layout-picker { width: auto; margin: 0 0 0 5px; padding-left: 7px; border-left: 1px solid var(--line-strong); }
+@media(max-width:760px) { .layout-picker { width: calc(100% - 32px); } }
+@media(max-width:560px) {
+  .pairing-dock { max-width: calc(100vw - 24px); flex-wrap: wrap; justify-content: center; }
+  .pairing-dock .layout-picker { justify-content: center; }
+}

@@ -1,0 +1,37 @@
+.like-button{display:inline-flex;align-items:center;justify-content:center;gap:4px;min-height:28px;padding:4px 7px;border:1px solid transparent;border-radius:6px;color:var(--secondary);background:transparent;font:11px/18px var(--font);white-space:nowrap;cursor:pointer}
+.like-button svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.like-button:hover{background:var(--hover);color:var(--text)}
+.like-button[aria-pressed=true]{color:#d69bab}
+[data-theme=light] .like-button[aria-pressed=true]{color:#a8536c}
+.like-button[aria-pressed=true] svg{fill:currentColor;stroke-width:1}
+.like-button:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
+.material-tile{position:relative;min-width:0}
+.material-tile .material-choice{width:100%;height:100%}
+.material-tile>.like-button{position:absolute;z-index:1;top:4px;right:5px}
+.material-tile .choice-meta{justify-content:flex-start;gap:9px;padding-right:55px;min-height:18px}
+.context-meta .context-actions{display:flex;align-items:center;gap:10px;flex-shrink:0;font-size:11px;white-space:nowrap}
+.context-actions>a{padding:5px 0 5px 5px}.context-actions button[data-show-liked]{color:var(--secondary);font-size:11px;padding:4px 6px}
+.wall-tools{gap:12px}.wall-tools nav{align-items:center}
+.wall-tools .view-tabs{gap:2px;padding:3px;background:var(--hover);border:1px solid var(--line);border-radius:8px}
+.wall-tools .view-tabs button{border:0;white-space:nowrap;min-height:28px;padding:4px 10px}
+.wall-tools .view-tabs button[aria-pressed=true]{background:var(--selected)}
+.view-tabs span{margin-left:5px;font-size:10px;color:var(--muted)}
+.wall-tools .group-jumps{margin-right:auto;font-size:11px;gap:13px}
+html[data-view=liked] .wall-tools{position:sticky;top:0;z-index:5;background:var(--page);border-bottom:1px solid var(--line);padding:10px 0;margin-bottom:20px}
+.liked-intro{display:flex;align-items:baseline;gap:14px;margin-bottom:20px}.liked-intro h2{font-size:14px;font-weight:550}.liked-intro p{color:var(--secondary);font-size:11px}
+.comparison-item+.comparison-item{margin-top:24px}
+.comparison-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 4px 7px}
+.comparison-description{display:flex;align-items:baseline;gap:14px;min-width:0}.comparison-description h3{margin:0;white-space:nowrap;font-size:12px;font-weight:550}.comparison-description p{font-size:11px;color:var(--secondary)}
+.comparison-actions{display:flex;align-items:center;gap:12px;white-space:nowrap;font-size:11px}.comparison-actions>a{padding:5px 0}
+.comparison-stage{min-height:174px;padding:8px 0;display:flex;align-items:center;justify-content:center;background:linear-gradient(125deg,var(--stage),var(--page));border-radius:12px;overflow:hidden}
+.comparison-surface.signal-overlay{position:static;inset:auto;display:block;z-index:auto;background:transparent;max-width:100%}
+.comparison-surface .signal-panel{transform:none;max-width:calc(100vw - 72px)}
+.comparison-list:focus-visible{outline:1px solid var(--signal-blue);outline-offset:-1px;border-radius:9px}
+.likes-empty{padding:54px 20px 66px;text-align:center;border:1px dashed var(--line-strong);border-radius:12px}.likes-empty p:first-child{font-size:14px;margin-bottom:8px}.likes-empty p{font-size:12px;color:var(--secondary)}.likes-empty button{margin-top:18px;padding:6px 14px;border:1px solid var(--line-strong);border-radius:7px;font-size:12px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+.variant-dock .like-button{min-width:0;padding:4px 6px}.variant-dock .like-button span{min-width:0;color:inherit}.variant-dock .variant-position{min-width:30px;color:var(--secondary);font-size:10px}.variant-dock button:disabled{opacity:.35;cursor:default}
+[hidden]{display:none!important}
+@media(max-width:950px){.context-meta #chosen-note{display:none}}
+@media(max-width:760px){.wall-tools{flex-wrap:wrap}.wall-tools .group-jumps{order:3;flex-basis:100%}.comparison-description p{display:none}.comparison-surface .signal-panel{max-width:calc(100vw - 48px)}.comparison-stage{min-height:164px}.material-tile>.like-button{top:2px;right:3px}}
+@media(max-width:555px){.context-meta .context-actions{gap:4px}.context-actions button[data-show-liked]{font-size:10px}.context-meta strong{font-size:11px}.like-button{font-size:10px}.liked-intro{display:block}.liked-intro p{margin-top:5px}.comparison-surface .signal-panel{max-width:calc(100vw - 40px)}.comparison-actions{gap:6px}.material-tile .choice-meta{gap:6px;padding-right:49px}}
+@media(prefers-contrast:more){.like-button[aria-pressed=true],[data-theme=light] .like-button[aria-pressed=true]{color:var(--text);border-color:currentColor}}

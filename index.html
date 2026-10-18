@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-material-id="05">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DSH Switcher</title>
+<script src="demo/layout-controls.js"></script>
+<link rel="stylesheet" href="demo/workspace.css">
+<link rel="stylesheet" href="demo/which-key.css">
+<link rel="stylesheet" href="src/styles/signal.css">
+<link rel="stylesheet" href="src/styles/native.css">
+<link rel="stylesheet" href="src/styles/fivebeat.css">
+<link rel="stylesheet" href="src/styles/dia-layout.css">
+<link rel="stylesheet" href="src/styles/surfaces.css">
+<link rel="stylesheet" href="src/styles/explorations.css">
+<link rel="stylesheet" href="src/styles/refinement.css">
+<link rel="stylesheet" href="src/styles/dia-calibration.css">
+</head>
+<body>
+<header class="lab" aria-label="原型体验工具">
+ <span class="dot"></span><span class="lab-title">DSH Switcher</span><span class="lab-badge">会话信号 · 交互原型</span>
+ <div class="lab-tools">
+  <button id="hint-toggle" aria-pressed="true" title="开关当前阅读面板顶部的微光"><span class="switch"></span><span class="label">焦点微光</span></button>
+  <button id="theme-toggle" title="切换明暗主题" aria-label="切换明暗主题"><span data-icon="light"></span></button>
+  <button id="guide-toggle" aria-pressed="false"><span data-icon="play"></span><span class="label">体验指引</span></button>
+  <button id="reset" title="重置本页演示"><span data-icon="refresh"></span><span class="label">重置</span></button>
+ </div>
+</header>
+<main class="workspace" id="workspace" data-focus="chat" data-glow="true">
+ <aside class="left" id="left" aria-label="左侧栏">
+  <div class="left-inner">
+   <div class="left-top"><button class="ib" data-action="s" aria-label="收起左侧栏" title="左侧栏 · s"><span data-icon="panel"></span></button></div>
+   <div class="brand"><img id="brand" alt="DeepSeek Harness"></div>
+   <button class="new-chat" data-action="n"><span data-icon="new"></span><span>新建会话</span><kbd>n</kbd></button>
+   <div class="nav-item"><span data-icon="plugin"></span><span>插件</span></div>
+   <div class="nav-item"><span data-icon="clock"></span><span>自动化任务</span></div>
+   <div class="workspace-heading"><span>工作区</span><span class="grow"></span><button class="ib" data-action="search-sessions" aria-label="搜索会话" title="搜索会话 · 在侧栏按 f"><span data-icon="search"></span></button></div>
+   <div class="session-tree" id="session-tree" role="tree" tabindex="0" aria-label="会话列表" data-area="left"></div>
+   <div class="sidebar-footer"><span class="avatar">N</span><span>Nick</span><span class="grow"></span><span class="muted" style="font-size:10px">本地工作区</span></div>
+  </div>
+ </aside>
+ <section class="chat" id="chat" aria-label="对话">
+  <header class="chat-header"><button class="ib" id="left-reopen" data-action="s" aria-label="展开左侧栏" title="左侧栏 · s" hidden><span data-icon="panel"></span></button><h1 id="session-title">打磨键盘导航体验</h1><span class="header-context"><span data-icon="agent"></span>Agent Team</span><div class="header-actions"><button class="ib" data-action="search-sessions" aria-label="切换会话" title="搜索并切换会话"><span data-icon="search"></span></button><button class="ib" data-action="r" aria-label="切换右侧栏" title="右侧栏 · r"><span data-icon="panel" class="flip"></span></button></div></header>
+  <div class="chat-tabs" role="tablist" aria-label="对话视图"><button class="chat-tab active" id="chat-tab" role="tab" aria-selected="true">对话</button><button class="chat-tab" id="trajectory-tab" role="tab" aria-selected="false">执行轨迹</button><span class="grow"></span><span class="muted" id="session-workspace" style="font-size:10px">dshMagicShortcuts</span></div>
+  <div class="chat-scroll" id="chat-scroll" tabindex="0" data-area="chat" role="region" aria-label="聊天阅读区"><div class="messages" id="messages"></div></div>
+  <div class="composer-wrap"><div class="composer"><textarea id="composer" rows="2" placeholder="发送消息或运行任务，/ 命令，@ 文件或会话" aria-label="聊天输入框" data-area="input"></textarea><div class="composer-tools"><span class="ib" style="width:24px;height:24px"><span data-icon="plus"></span></span><span>完整访问</span><span class="model">DeepSeek-V4.1<span class="muted">Max</span><span data-icon="down"></span></span><button class="send" id="send" title="发送演示消息" aria-label="发送演示消息" disabled><span data-icon="send"></span></button></div></div><div class="stats"><span>2 轮对话 · 8 个步骤</span><span>24.6K tok</span><span>缓存命中 94%</span></div></div>
+ </section>
+ <aside class="right" id="right" tabindex="0" data-area="right" aria-label="右侧面板阅读">
+  <div class="right-top"><span>工作台</span><div class="tool-launcher"><button class="ib" data-action="e" title="文件 · e" aria-label="打开文件浏览器"><span data-icon="folder"></span></button><button class="ib" data-action="b" title="浏览器 · b" aria-label="打开浏览器"><span data-icon="globe"></span></button><button class="ib" data-action="t" title="终端 · t" aria-label="打开终端"><span data-icon="terminal"></span></button><button class="ib" data-action="R" title="放大 / 还原 · Shift + r" aria-label="放大右侧面板" id="maximize-button"><span data-icon="fullscreen"></span></button><button class="ib" data-action="close-right" aria-label="收起右侧栏" title="收起右侧栏"><span data-icon="close"></span></button></div></div>
+  <div class="right-tabs" id="right-tabs" role="tablist" aria-label="工具标签页"></div>
+  <div class="right-content" id="right-content"></div>
+ </aside>
+ <aside class="which-key" id="which-key" aria-label="阅读快捷键" hidden></aside>
+ <span class="sr" id="region-status" role="status" aria-live="polite" aria-atomic="true"></span>
+</main>
+<section class="guide" id="guide" hidden aria-label="原型体验指引">
+ <div><div class="guide-caption">试一段真实操作</div><div class="scenario-tabs"><button class="active" data-scenario="switch">切换会话</button><button data-scenario="terminal">终端往返</button><button data-scenario="browser">浏览器全屏</button></div></div>
+ <div class="guide-path"><div class="key-path" id="guide-keys"></div><p id="guide-text"></p></div><div class="guide-note">阅读时直接按字母。<br><kbd>Esc</kbd> 逐层返回阅读。</div>
+</section>
+<footer class="status-bar"><span class="focus-status" id="focus-status">对话 · 阅读</span><span style="color:var(--line-strong)">/</span><kbd class="last-key" id="last-key">—</kbd><span class="status-tip" id="status-tip">按 ? 查看当前区域快捷键</span><span class="status-end"><span>示例会话 · 本地交互</span><button id="help-button">操作说明</button></span></footer>
+<dialog class="search-dialog" id="search-dialog" aria-label="搜索并切换会话"><div class="search-header"><span data-icon="search"></span><input class="search-input" id="search-input" role="combobox" aria-label="搜索会话名称" aria-controls="search-results" aria-expanded="true" aria-autocomplete="list" placeholder="搜索会话名称…" autocomplete="off"><button class="ib" id="search-close" aria-label="关闭搜索"><span data-icon="close"></span></button></div><div class="search-hint" id="search-hint">最近访问与全部会话</div><div class="search-results" id="search-results" role="listbox" aria-label="会话搜索结果"></div><div class="search-footer"><span><kbd>↑</kbd> <kbd>↓</kbd> 选择</span><span><kbd>Enter</kbd> 打开会话</span><span><kbd>Esc</kbd> 返回</span><span class="grow"></span><span id="result-count"></span></div></dialog>
+<dialog class="help-dialog" id="help-dialog" aria-label="原型操作说明"><div class="help-heading"><div class="grow"><h2>让双手留在键盘上</h2><p>以下按键在导航区域生效；输入时保持正常打字。</p></div><button class="ib" id="help-close" aria-label="关闭操作说明"><span data-icon="close"></span></button></div><div class="help-body"><div class="help-grid" id="help-grid"></div><div class="help-note"><strong>左侧栏：</strong>j / k 或方向键移动候选，Enter 打开会话；h / l 折叠 / 展开分组（方向键也可用）。Esc 取消尚未打开的候选；保持在左侧阅读。<br><strong>终端：</strong>跳转、切换标签或点击内容后默认阅读；按 i 才输入命令，Esc 回到终端阅读。按 c 再按 i 可回到对话输入。<br><strong>浏览器：</strong>跳转后默认阅读；i 默认编辑地址栏，点过网页输入框后 i 编辑该输入框。Enter 打开地址后回到阅读，Esc 先交给网页控件，再退出输入；全屏另按一次恢复。<br><strong>按键提示：</strong>进入阅读态自动出现；第一次操作直接生效并收起，? 再次查看。g 只用于前往，Space 用于命令。单键提示不占用 Esc 层级；前缀序列可由 Esc 单独取消。<br><strong>Esc 逐层返回：</strong>输入法与控件先处理；搜索或说明只关闭自身；再退出输入，回到所属面板阅读；全屏另按一次恢复布局。阅读中按 Esc 不跳转、不收起面板。按住不连续退出。Ctrl+; 和 Cmd+Shift+; 保留为兼容入口。<br><strong>焦点微光：</strong>候选沿用原生灰底和小回车标记；阅读面板顶部仅有一小段微光，切换时稍亮后收敛。输入时微光退场，由光标指示。顶部可关闭微光；系统减少动态效果时不播放动画。<br><strong>体验范围：</strong>会话、草稿、文件和网页均为示例；终端仅模拟 help、ls、pwd、echo、clear。刷新页面会还原演示数据。这里的操作说明属于原型工具。</div></div></dialog>
+<div class="toast-announcement" id="announcement" role="status" hidden></div>
+<dialog class="local-find" id="local-find" aria-label="搜索当前区域"><div class="find-heading" id="find-heading">搜索当前对话</div><div class="find-controls"><input id="find-input" aria-label="查找内容" placeholder="查找…" autocomplete="off"><span class="find-count" id="find-count">0 / 0</span><button class="ib find-prev" id="find-prev" aria-label="上一个匹配"><span data-icon="right"></span></button><button class="ib find-next" id="find-next" aria-label="下一个匹配"><span data-icon="right"></span></button><button class="ib" id="find-close" aria-label="关闭当前搜索"><span data-icon="close"></span></button></div></dialog>
+<dialog class="command-dialog" id="command-dialog" aria-label="搜索命令"><div class="search-header"><span data-icon="search"></span><input class="search-input" id="command-input" aria-label="搜索命令" placeholder="想做什么？" autocomplete="off"><button class="ib" id="command-close" aria-label="关闭命令面板"><span data-icon="close"></span></button></div><div class="command-results" id="command-results" role="listbox" aria-label="命令结果"></div><div class="search-footer"><span><kbd>↑</kbd> <kbd>↓</kbd> 选择</span><span><kbd>Enter</kbd> 执行</span><span class="grow"></span><span><kbd>Esc</kbd> 返回</span></div></dialog>
+<dialog class="settings-dialog" id="settings-dialog" aria-label="设置"><div class="help-heading"><div class="grow"><h2>设置</h2><p>按自己的习惯使用工作区。</p></div><button class="ib" id="settings-close" aria-label="关闭设置"><span data-icon="close"></span></button></div><div class="settings-body"><div class="setting-row"><div><strong>阅读态按键提示</strong><p>进入阅读时自动显示，开始操作后收起。</p></div><button id="auto-hints-setting" aria-pressed="true">已开启</button></div><div class="setting-row"><div><strong>外观</strong><p>跟随当前工作区的明暗风格。</p></div><button id="theme-setting">深色</button></div><div class="setting-row"><div><strong>自定义快捷键</strong><p>后续在这里调整；当前放大面板使用 <span class="setting-key">R</span>。</p></div><span class="setting-later">稍后提供</span></div></div></dialog>
+<script src="demo/which-key.js"></script>
+<script src="demo/workspace.js"></script>
+<script>if(new URLSearchParams(location.search).get("theme")==="dark")document.documentElement.dataset.theme="dark";</script>
+<script src="src/motion.js"></script>
+<script src="src/icon-family.js"></script>
+<script src="src/switcher.js"></script>
+<script src="demo/design-controls.js"></script>
+</body>
+</html>
