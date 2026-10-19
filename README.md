@@ -14,6 +14,23 @@ DeepSeek Harness 的 Ctrl + Tab 最近会话切换器。独立于 `dshMagicShort
 
 ## 构建与安装
 
+### 从 Git 地址安装
+
+Git 安装会通过 `prepare` 自动构建 `lib/`，构建只使用 Node.js 标准库。仓库仍只提交源码，安装后的包携带完整的客户端和宿主入口。
+
+在 DSH 添加插件界面填写 `git+https://github.com/iobee/dsh-switcher.git#main`，或使用 macOS 官方桌面应用自带的 CLI：
+
+```sh
+"/Applications/DeepSeek Harness.app/Contents/Resources/runtime/cli/bin/dsh" \
+  plugin --profile desktop add 'git+https://github.com/iobee/dsh-switcher.git#main'
+```
+
+首次安装若出现 `ERR_PNPM_GIT_DEP_PREPARE_NOT_ALLOWED`，按 DSH 提示打开该 profile 的 `pnpm-workspace.yaml`，把 pnpm 输出的完整包键及 `true` 值加入 `allowBuilds`，保留已有条目，再运行同一命令。授权允许本插件在安装时执行构建脚本；pnpm 11 的 Git 授权键含仓库地址和提交，不能只写 `dsh-switcher`。推荐把 `#main` 换成确认过的完整 commit SHA；使用精确提交授权时，升级到新提交需重新授权。Git 安装不要加 `--ignore-scripts`。
+
+Git 仓库仍需可访问，私有仓库需要当前机器已有相应 Git 凭据。需要免构建授权时，使用下方预构建 `.tgz` 安装方式。参见 [DSH 官方打包与安装说明](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/user/develop/basic/publish.zh.md#从-github-安装构建脚本这道坎)。
+
+### 从预构建安装包安装
+
 使用 Node.js 20 或更新版本，不需要第三方构建依赖：
 
 ```sh
@@ -21,7 +38,7 @@ npm run build
 npm test
 npm run check
 npm run pack:local
-dsh plugin --profile desktop add /absolute/path/to/dsh-switcher/dist/dsh-switcher-0.1.8.tgz --offline --ignore-scripts
+dsh plugin --profile desktop add /absolute/path/to/dsh-switcher/dist/dsh-switcher-0.1.9.tgz --offline --ignore-scripts
 ```
 
 安装包只有客户端代码、空的宿主入口、插件补丁、包信息和说明。使用官方插件安装路径，不修改 DSH 应用包。针对 DSH **0.2.1-rc.2** 的公开客户端服务开发，目前本机验证平台为 macOS。
@@ -70,3 +87,9 @@ dist/                可安装 tgz（忽略 Git）
 ```
 
 历史方案和原项目均保留。主入口不依赖同级项目或仓库外资源。MRU 仅在当前窗口 sessionStorage 保存会话 ID；提示词与草稿不持久化、不发送到外部服务。预览期间最多额外保留五个会话，关闭立即释放；不轮询所有会话历史，不调用模型。
+
+### Git 安装回归验证
+
+使用 Node.js 22.19 或更新版本及 pnpm 11，在仓库中运行 `npm run test:install`。该检查验证 **HEAD 已提交内容**：从 Git 地址取源码，在临时目录和空缓存下确认未授权构建被拒绝，按 pnpm 返回的精确提交键授权后重试；核对两个入口、补丁和干净构建逐字节一致，并验证 `.tgz` 可在 `--ignore-scripts` 下安装。它不修改日常 DSH profile，也不代替真实宿主交互验证。
+
+可用 `--ref <commit>` 选择已提交版本，用 `--spec 'git+https://github.com/owner/repo.git#<完整commit>'` 验证远端同一提交。`DSH_INSTALL_PNPM` 或 `--pnpm` 可指定 pnpm 可执行文件或其 `.cjs` / `.mjs` 入口；默认使用 PATH 中的 pnpm。检查失败会保留临时目录和安装日志。CI 使用 pnpm 11.28.5 执行相同的 Git 安装检查与现有回归测试。
