@@ -1,0 +1,75 @@
+{
+  "checks": [
+    {
+      "name": "Light: opening hides all panel descendant cursors, outside stays visible",
+      "pass": true
+    },
+    {
+      "name": "Keyboard cycling keeps cursor hidden",
+      "pass": true
+    },
+    {
+      "name": "Actual movement reveals cursor without changing selection in padding",
+      "pass": true
+    },
+    {
+      "name": "Card click commits after a pointer drag",
+      "pass": true
+    },
+    {
+      "name": "Reopening under a stationary pointer hides it again",
+      "pass": true
+    },
+    {
+      "name": "Control-click commits while cursor is hidden and restores cursor on close",
+      "pass": true
+    },
+    {
+      "name": "Dark theme hides the cursor on opening",
+      "pass": true
+    },
+    {
+      "name": "480px: last card stays visible and cursor hidden while keyboard scrolls",
+      "pass": true
+    },
+    {
+      "name": "480px light: cursor remains hidden and layout preserved",
+      "pass": true
+    },
+    {
+      "name": "Disposal removes the overlay and leaves host cursor alone",
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "narrowDark": {
+    "cursor": "none",
+    "overflow": false,
+    "panel": {
+      "bottom": 455,
+      "height": 190,
+      "left": 16,
+      "right": 464,
+      "top": 265,
+      "width": 448,
+      "x": 16,
+      "y": 265
+    },
+    "scroll": 494,
+    "selected": {
+      "bottom": 439,
+      "height": 158,
+      "left": 266,
+      "right": 448,
+      "top": 281,
+      "width": 182,
+      "x": 266,
+      "y": 281
+    }
+  },
+  "narrowLight": {
+    "cursor": "none",
+    "theme": "light",
+    "width": 448
+  }
+}

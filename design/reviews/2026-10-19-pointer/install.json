@@ -1,0 +1,24 @@
+{
+  "version": "0.1.8",
+  "filesMatch": {
+    "lib/client.js": true,
+    "lib/index.js": true,
+    "package.json": true,
+    "README.md": true,
+    "cordis.patch.yml": true
+  },
+  "clientSHA256": "086797bf3452f285f4f57672db141a12e930a36f68d13504e92d25aa3f90e1f2",
+  "appUnchanged": true,
+  "configUnchanged": {
+    "cordis.yml": true,
+    "cordis.patch.yml": true,
+    "pnpm-workspace.yaml": true
+  },
+  "otherDependenciesUnchanged": true,
+  "nativeChecks": {
+    "openedWithControlTab": true,
+    "escapeCancelled": true,
+    "originalSessionRetained": true,
+    "cursorVisibilityInspectedNatively": false
+  }
+}

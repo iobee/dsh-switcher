@@ -102,6 +102,7 @@ export function mountSwitcher(container, host) {
     } else if (selection?.rangeCount && returnFocus?.contains(selection.anchorNode)) returnSelection = { range: selection.getRangeAt(0).cloneRange() };
     cycle = new SwitchCycle(ids, host.current(), direction);
     overlay = document.createElement('div'); overlay.className = 'dsh-switcher'; overlay.dataset.revealed = 'false';
+    overlay.dataset.pointer = 'keyboard';
     overlay.dataset.theme = host.theme(); overlay.dataset.shortcutModal = 'dsh-switcher'; overlay.tabIndex = -1;
     overlay.setAttribute('role', 'dialog'); overlay.setAttribute('aria-modal', 'true'); overlay.setAttribute('aria-label', '切换会话');
     const panel = document.createElement('div'); panel.className = 'dsh-switcher-panel'; panel.style.setProperty('--sw-width', `${ids.length * 182 + 32}px`);
@@ -128,6 +129,11 @@ export function mountSwitcher(container, host) {
       // macOS turns Control+primary-click into contextmenu, without a click event.
       card.addEventListener('contextmenu', event => { if (event.ctrlKey) commit(event); });
     });
+    // Start each presentation with a quiet pointer. Enter/over events caused by
+    // revealing the panel must not reveal it or take over keyboard selection.
+    overlay.addEventListener('pointermove', event => {
+      if (overlay.dataset.pointer === 'keyboard' && (event.movementX || event.movementY)) overlay.dataset.pointer = 'mouse';
+    }, { capture: true, passive: true });
     panel.append(list); overlay.append(panel); container.append(overlay);
     const viewport = list;
     viewportWidth = viewport.clientWidth; scrollPosition = 0;

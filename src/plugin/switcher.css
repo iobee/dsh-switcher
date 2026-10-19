@@ -22,6 +22,8 @@
 }
 .dsh-switcher *, .dsh-switcher *::before, .dsh-switcher *::after { box-sizing: border-box; }
 .dsh-switcher[data-revealed=false] .dsh-switcher-panel { visibility: hidden; }
+.dsh-switcher[data-pointer=keyboard] .dsh-switcher-panel,
+.dsh-switcher[data-pointer=keyboard] .dsh-switcher-panel * { cursor: none; }
 .dsh-switcher-panel {
   box-sizing: border-box; width: min(var(--sw-width, 942px), calc(100vw - 32px)); padding: 15px; margin: 0;
   border: 1px solid var(--sw-edge); border-radius: 24px; background: var(--sw-tint); box-shadow: var(--sw-shadow);

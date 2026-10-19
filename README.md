@@ -7,6 +7,7 @@ DeepSeek Harness 的 Ctrl + Tab 最近会话切换器。独立于 `dshMagicShort
 - `Ctrl + Tab` 切回上一个会话。按住 Ctrl，140ms 后显示横向浮层，继续点 Tab 循环选择。
 - `Ctrl + Shift + Tab` 反向选择，松开 Ctrl 提交。
 - `Esc` 取消；`Enter` 或点击卡片也可确认。macOS 按住 Ctrl 点击卡片同样立即确认，不必松键。失焦、窗口隐藏、输入法组合时取消。
+- 每次打开先隐藏浮层内的鼠标光标，移动后恢复并接管选择；静止鼠标不打断键盘选择。关闭即恢复正常光标。
 - 当前会话和四个最近会话跨工作区展示，打开期间顺序固定。初次使用按最近活动补齐，过滤归档、已删除和空白会话；未访问的子代理不进入候选。
 
 卡片按 **项目 / 工作区 → 两行会话标题 → 状态 → 单行最后输入** 排列。项目名优先使用 DSH 工作区名称，未分组会话回退到目录名；重命名和归属变化实时更新。状态读取 DSH 的运行、待确认/待回应、未读结果及草稿事实，保留完整 11「五拍」动效。最后输入仅作辅助线索，停留可查看原文摘录；空白、加载与读取失败有各自提示。
@@ -20,7 +21,7 @@ npm run build
 npm test
 npm run check
 npm run pack:local
-dsh plugin --profile desktop add /absolute/path/to/dsh-switcher/dist/dsh-switcher-0.1.7.tgz --offline --ignore-scripts
+dsh plugin --profile desktop add /absolute/path/to/dsh-switcher/dist/dsh-switcher-0.1.8.tgz --offline --ignore-scripts
 ```
 
 安装包只有客户端代码、空的宿主入口、插件补丁、包信息和说明。使用官方插件安装路径，不修改 DSH 应用包。针对 DSH **0.2.1-rc.2** 的公开客户端服务开发，目前本机验证平台为 macOS。
