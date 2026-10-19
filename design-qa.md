@@ -41,3 +41,9 @@ final result: passed
 - 已通过官方 CLI 安装 0.1.5，包内 5 个文件与安装目录一致；真实 DSH 的 Ctrl+Tab 唤起和 Esc 取消正常。浏览器视觉检查不代替宿主细节材质验证；具体边界记录在 `design/integration.md`。没有重新宣称验证独立 Control 松键、VoiceOver 或任意自定义主题。
 
 final result: passed
+
+## 0.1.7 性能与鼠标确认
+
+保留 0.1.5 的全部 CSS 和非选中样式。修正 macOS Ctrl 点击直接切换，减少重复内容刷新、完整历史扫描及静止图标绘制。明暗 / 窄窗口、实时数据和草稿保留已检查；原始测量、19 项测试及浏览器/宿主边界见 [性能验证](design/reviews/2026-10-19-performance/README.md)。
+
+final result: passed

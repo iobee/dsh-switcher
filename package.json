@@ -1,6 +1,6 @@
 {
   "name": "dsh-switcher",
-  "version": "0.1.5",
+  "version": "0.1.7",
   "private": true,
   "description": "DSH Switcher — Ctrl+Tab 最近会话切换器",
   "type": "module",

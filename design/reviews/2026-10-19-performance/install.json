@@ -1,0 +1,20 @@
+{
+  "version": "0.1.7",
+  "filesMatch": {
+    "lib/client.js": true,
+    "lib/index.js": true,
+    "package.json": true,
+    "README.md": true,
+    "cordis.patch.yml": true
+  },
+  "clientSHA256": "e9f90bf8a34afefc7c398d58f46c9f8fe9a2e5d2a13762288ceb6f0112880f04",
+  "configsUnchanged": {
+    "cordis.yml": true,
+    "cordis.patch.yml": true,
+    "pnpm-workspace.yaml": true
+  },
+  "dependencyChanges": [
+    "dsh-switcher"
+  ],
+  "appUnchanged": true
+}

@@ -1,0 +1,30 @@
+{
+  "version": "current",
+  "hover": {
+    "events": 200,
+    "ms": 0.5,
+    "rowReads": 0,
+    "attributes": 0,
+    "textReplacements": 0,
+    "svgPaths": 0
+  },
+  "cycle": {
+    "events": 100,
+    "ms": 0.19999998807907104,
+    "p95": 0,
+    "rowReads": 0,
+    "attributes": 300,
+    "textReplacements": 0,
+    "svgPaths": 0
+  },
+  "motion": {
+    "durationMS": 2000.699999988079,
+    "callbacks": 241,
+    "callbackMS": 21.299999952316284,
+    "p95": 0.19999998807907104,
+    "attributes": 1422,
+    "textReplacements": 0,
+    "svgPaths": 1152
+  },
+  "note": "合成负载与 fixture 工作量，不代表原生 DSH 的端到端帧率。"
+}

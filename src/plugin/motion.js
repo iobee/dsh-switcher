@@ -6,9 +6,11 @@ export function createFivebeatMotion() {
   let frame = 0, previous = 0, alive = true;
   const start = performance.now();
   const line = (x1, y1, x2, y2, alpha = 1, width = 1.9) => ({
-    points: Array.from({ length: 24 }, (_, i) => [x1 + (x2 - x1) * i / 23, y1 + (y2 - y1) * i / 23]), alpha, width,
+    // Every family-11 segment and its morph is a straight line; endpoints are exact.
+    points: [[x1, y1], [x2, y2]], alpha, width,
   });
   const dot = (x, y, alpha, width) => line(x, y, x + .001, y, alpha, width);
+  const animated = kind => kind === 'running' || kind === 'approval';
   function pose(state, time) {
     const t = reduced.matches ? .65 : time;
     const breath = reduced.matches ? .5 : (1 - Math.cos(t * Math.PI * 2 / 3.4)) * .5;
@@ -27,13 +29,21 @@ export function createFivebeatMotion() {
     else shapes = [0, 1, 2, 3, 4].map(i => line(7 + i * 4.5, 13, 7 + i * 4.5, 19, .6, 1.8));
     return Array.from({ length: 8 }, (_, i) => shapes[i] || dot(16, 16, 0, 3));
   }
+  function draw(item, index) {
+    const shape = item.current[index], path = item.paths[index], old = item.rendered[index];
+    const d = shape.points.map((point, i) => `${i ? 'L' : 'M'}${point[0].toFixed(2)},${point[1].toFixed(2)}`).join(' ');
+    const alpha = shape.alpha.toFixed(3), width = shape.width.toFixed(2);
+    if (old.d !== d) { path.setAttribute('d', d); old.d = d; }
+    if (old.alpha !== alpha) { path.setAttribute('opacity', alpha); old.alpha = alpha; }
+    if (old.width !== width) { path.setAttribute('stroke-width', width); old.width = width; }
+  }
   function tick(now) {
     frame = 0;
     if (!alive || document.hidden) return;
-    if (previous && now - previous < 30) { frame = requestAnimationFrame(tick); return; }
     const dt = Math.min(48, previous ? now - previous : 32); previous = now;
     let moving = false;
     for (const item of items) {
+      if (!item.dirty && (reduced.matches || !animated(item.kind))) continue;
       const target = pose(item.kind, (now - start) / 1000), blend = reduced.matches ? 1 : 1 - Math.exp(-dt / 68);
       let unsettled = false;
       target.forEach((shape, i) => {
@@ -48,18 +58,18 @@ export function createFivebeatMotion() {
         if (Math.abs(shape.alpha - current.alpha) > .01 || Math.abs(shape.width - current.width) > .01) unsettled = true;
         current.alpha += (shape.alpha - current.alpha) * blend;
         current.width += (shape.width - current.width) * blend;
-        item.paths[i].setAttribute('d', current.points.map((p, j) => `${j ? 'L' : 'M'}${p[0].toFixed(2)},${p[1].toFixed(2)}`).join(' '));
-        item.paths[i].setAttribute('opacity', current.alpha.toFixed(3));
-        item.paths[i].setAttribute('stroke-width', current.width.toFixed(2));
+        draw(item, i);
       });
-      moving ||= !reduced.matches && (unsettled || ['running', 'approval'].includes(item.kind));
+      item.dirty = !reduced.matches && unsettled;
+      moving ||= item.dirty || (!reduced.matches && animated(item.kind));
     }
     if (moving) frame = requestAnimationFrame(tick);
   }
   function wake() { if (alive && !frame && !document.hidden) { previous = 0; frame = requestAnimationFrame(tick); } }
   const visibility = () => { cancelAnimationFrame(frame); frame = 0; wake(); };
+  const preference = () => { for (const item of items) item.dirty = true; wake(); };
   document.addEventListener('visibilitychange', visibility);
-  reduced.addEventListener('change', wake);
+  reduced.addEventListener('change', preference);
   return {
     mount(host, kind, draft) {
       const svg = document.createElementNS(ns, 'svg');
@@ -67,17 +77,21 @@ export function createFivebeatMotion() {
       const paths = Array.from({ length: 8 }, () => { const p = document.createElementNS(ns, 'path'); svg.append(p); return p; });
       const badge = document.createElementNS(ns, 'path');
       badge.setAttribute('d', 'M24.1 26.4 L27.4 23.1'); badge.setAttribute('stroke-width', '1.8'); svg.append(badge); host.append(svg);
-      const item = { paths, kind, current: pose(kind, .65) }; items.add(item);
+      const item = { paths, kind, current: pose(kind, .65), rendered: Array.from({ length: 8 }, () => ({})), dirty: false, draft: undefined }; items.add(item);
+      paths.forEach((_, index) => draw(item, index));
       const update = (next, hasDraft) => {
-        item.kind = next; svg.dataset.state = next;
-        badge.setAttribute('opacity', hasDraft && !['idle', 'draft'].includes(next) ? '.85' : '0'); wake();
+        if (item.kind !== next) { item.kind = next; item.dirty = true; svg.dataset.state = next; wake(); }
+        const showBadge = !!hasDraft && !['idle', 'draft'].includes(next);
+        if (item.draft !== showBadge) { item.draft = showBadge; badge.setAttribute('opacity', showBadge ? '.85' : '0'); }
       };
+      svg.dataset.state = kind;
       update(kind, draft);
+      if (!reduced.matches && animated(kind)) wake();
       return { update };
     },
     destroy() {
       alive = false; cancelAnimationFrame(frame); items.clear();
-      document.removeEventListener('visibilitychange', visibility); reduced.removeEventListener('change', wake);
+      document.removeEventListener('visibilitychange', visibility); reduced.removeEventListener('change', preference);
     },
   };
 }

@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Control-click context menu commits immediately",
+    "pass": true
+  },
+  {
+    "name": "Control release does not commit twice",
+    "pass": true
+  },
+  {
+    "name": "Ordinary right click does not switch",
+    "pass": true
+  },
+  {
+    "name": "Normal click commits without a key release",
+    "pass": true
+  },
+  {
+    "name": "Preview references released",
+    "pass": true
+  }
+]

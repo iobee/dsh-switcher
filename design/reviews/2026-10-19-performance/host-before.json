@@ -1,0 +1,10 @@
+{
+  "source": "review/performance/before/host.js",
+  "historyEntries": 5001,
+  "assistantUpdates": 1000,
+  "draftUpdates": 1000,
+  "ms": 13.598791000000002,
+  "fullWindowReads": 2001,
+  "publishedUpdates": 2000,
+  "finalText": "最近一条真实人类输入的模拟内容"
+}

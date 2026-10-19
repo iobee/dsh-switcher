@@ -1,0 +1,10 @@
+{
+  "source": "src/plugin/host.js",
+  "historyEntries": 5001,
+  "assistantUpdates": 1000,
+  "draftUpdates": 1000,
+  "ms": 0.7831250000000001,
+  "fullWindowReads": 1,
+  "publishedUpdates": 1,
+  "finalText": "最近一条真实人类输入的模拟内容"
+}

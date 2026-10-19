@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Switcher · 性能与输入验证</title>
+<link id="switcher-style" rel="stylesheet" href="../src/plugin/switcher.css">
+<style>
+body { margin:0; background:#f1f3f5; color:#34383e; font:14px/1.5 -apple-system,sans-serif; }
+header { padding:24px; } nav { position:fixed; z-index:10001; bottom:24px; left:24px; display:flex; gap:8px; }
+button { font:inherit; padding:8px 12px; } pre { max-height:180px; overflow:auto; margin:16px 24px; font-size:11px; }
+#events { position:fixed; right:24px; bottom:16px; max-width:440px; max-height:140px; }
+</style></head><body>
+<header><strong>性能与输入验证</strong> <span id="version"></span><div id="current">当前：a</div><div id="result" role="status">准备就绪</div></header>
+<pre id="metrics"></pre><pre id="events"></pre>
+<nav><button id="open">打开浮层</button><button id="bench">测量工作量</button><button id="regressions">验证交互</button><button id="light">亮色</button><button id="dark">暗色</button></nav>
+<div id="mount"></div><script type="module" src="performance.js"></script></body></html>

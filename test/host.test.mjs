@@ -45,3 +45,50 @@ test('host observes real sources, retains only preview candidates, and releases 
   host.destroy(); assert.equal(events.size, 0); assert.equal(input.size, 0); assert.equal(list.size, 0); assert.equal(status.size, 0); assert.equal(workspaces.size, 0);
   delete globalThis.sessionStorage;
 });
+
+test('streaming uses event deltas; draft/status notifications do not rescan or republish unchanged text', () => {
+  let materializations = 0, retains = 0, releases = 0;
+  const user = text => ({ event: { type: 'user/message', data: { content: text } } });
+  const assistant = { event: { type: 'assistant/message', data: { content: 'stream' } } };
+  const windowOf = (revision, change, entries) => ({ revision, change, get entries() { materializations++; return entries; } });
+  const events = store(windowOf(0, { kind: 'replace' }, [user('最初输入')]));
+  const session = Object.assign(store({ openState: 'open' }), { eventSource: events });
+  const input = store({ draft: '' }), binding = { sessionId: 'a', ctx: {}, session };
+  const ctx = {
+    sessions: { list: store({ ids: ['a'], byId: { a: { title: 'A' } } }), binding: () => binding,
+      retain() { retains++; return { binding, ready: Promise.resolve(), release() { releases++; } }; } },
+    sidebarRight: { mounted: store('a') }, uiSession: { sessionStatus: store(new Map()) },
+    workspaces: { list: store({ items: [], archivedSessionIds: [] }) },
+    conversation: { input: { for: () => ({ state: input }) } },
+    theme: { getTheme: () => ({ active: { colorScheme: 'light' } }) }, uiWorkspace: { openSession() {} }, on: () => () => {},
+  };
+  const host = createHostAdapter(ctx);
+  let updates = 0; host.subscribe(() => updates++);
+  assert.equal(materializations, 1);
+  for (let revision = 1; revision <= 100; revision++) {
+    events.set(windowOf(revision, { kind: 'append', entries: [assistant] }, [user('最初输入'), assistant]));
+  }
+  assert.equal(materializations, 1); assert.equal(updates, 0);
+  input.set({ draft: '草稿' }); input.set({ draft: '草稿继续输入' }); session.set({ openState: 'open' });
+  assert.equal(materializations, 1); assert.equal(updates, 1); assert.equal(host.row('a').draft, true);
+  events.set(windowOf(101, { kind: 'append', entries: [user('新的输入')] }, []));
+  assert.equal(host.row('a').text, '新的输入'); assert.equal(updates, 2);
+  events.set(windowOf(102, { kind: 'prepend', entries: [user('更早的输入')] }, []));
+  events.set(windowOf(103, { kind: 'settle-assistant', entry: assistant }, []));
+  assert.equal(host.row('a').text, '新的输入'); assert.equal(materializations, 1); assert.equal(updates, 2);
+  // A missed publication or a replacement must fall back to the complete snapshot.
+  events.set(windowOf(105, { kind: 'append', entries: [assistant] }, [user('跳过版本后的输入'), assistant]));
+  assert.equal(host.row('a').text, '跳过版本后的输入'); assert.equal(materializations, 2);
+  events.set(windowOf(106, { kind: 'replace' }, [user('替换窗口后的输入')]));
+  assert.equal(host.row('a').text, '替换窗口后的输入'); assert.equal(materializations, 3);
+  // A tail-only replacement can temporarily need a cached fallback; a later
+  // history page must still replace it with the window's latest human input.
+  events.set(windowOf(107, { kind: 'replace' }, [assistant]));
+  assert.equal(host.row('a').text, '替换窗口后的输入');
+  events.set(windowOf(108, { kind: 'prepend', entries: [user('分页补回的最近输入')] }, []));
+  assert.equal(host.row('a').text, '分页补回的最近输入'); assert.equal(materializations, 4);
+  const stop = host.preview(['a']);
+  assert.equal(retains, 0); assert.equal(events.size, 1);
+  stop(); assert.equal(releases, 0);
+  host.destroy(); assert.equal(events.size, 0); assert.equal(input.size, 0);
+});

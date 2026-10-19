@@ -9,20 +9,38 @@ export function createHostAdapter(ctx) {
   const publish = () => { if (!disposed) for (const listener of listeners) listener(); };
   function watch(binding) {
     const id = binding.sessionId, session = binding.session;
-    let input;
+    let input, eventWindow, windowHasInput = false, text = cache.get(id)?.text || '';
     try { input = ctx.conversation.input.for(binding.ctx).state; } catch { /* Some sources have no composer. */ }
     const refresh = () => {
       if (disposed) return;
       const snapshot = session.getSnapshot();
       const previous = cache.get(id);
-      const text = latestUserInput(session.eventSource.getSnapshot().entries);
+      const nextWindow = session.eventSource.getSnapshot();
+      if (nextWindow !== eventWindow) {
+        // DSH exposes contiguous event-window changes. Streaming assistant chunks
+        // must not materialize and scan the complete history for an unchanged user line.
+        const contiguous = eventWindow && Number.isInteger(nextWindow.revision) && nextWindow.revision === eventWindow.revision + 1;
+        const change = contiguous ? nextWindow.change : undefined;
+        let found;
+        if (change?.kind === 'append' && Array.isArray(change.entries)) found = latestUserInput(change.entries);
+        else if (change?.kind === 'prepend' && Array.isArray(change.entries)) {
+          // A cached fallback can predate this window's actual latest user input.
+          if (!windowHasInput) found = latestUserInput(change.entries);
+        } else if (change?.kind !== 'settle-assistant') {
+          found = latestUserInput(nextWindow.entries); windowHasInput = !!found;
+        }
+        if (found) { text = found; windowHasInput = true; }
+        eventWindow = nextWindow;
+      }
       const draftState = input?.getSnapshot();
-      cache.set(id, {
-        text: text || previous?.text || '',
+      const next = {
+        text,
         ready: snapshot.openState === 'open',
         error: snapshot.openState === 'error',
         draft: hasDraft(draftState?.draft) || !!draftState?.attachmentIds?.length,
-      });
+      };
+      if (previous && next.text === previous.text && next.ready === previous.ready && next.error === previous.error && next.draft === previous.draft) return;
+      cache.set(id, next);
       if (cache.size > 100) cache.delete(cache.keys().next().value);
       publish();
     };
@@ -75,6 +93,8 @@ export function createHostAdapter(ctx) {
       };
       previewOwners.add(release);
       for (const id of ids) {
+        // The mounted conversation already has a host-owned binding and watcher.
+        if (id === observedId && observedBinding) continue;
         let owner;
         try {
           const reference = ctx.sessions.retain(id, { source: 'plugin:dsh-switcher' });

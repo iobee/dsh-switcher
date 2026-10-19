@@ -80,3 +80,16 @@ test('other modals, composition, unrelated chords and disposal keep their input'
   assert.equal(f.key('keydown', 'Tab').defaultPrevented, false);
   assert.equal(f.controller.active, false);
 });
+
+test('a pointer commit while Control is held consumes the gesture only once', () => {
+  const f = fixture();
+  f.key('keydown', 'Tab');
+  f.controller.commit();
+  assert.deepEqual(f.commits, ['b']);
+  f.key('keyup', 'Control', { ctrlKey: false });
+  f.key('keyup', 'Tab', { ctrlKey: false });
+  assert.deepEqual(f.commits, ['b']); assert.equal(f.controller.active, false);
+  f.key('keydown', 'Tab'); f.key('keyup', 'Control', { ctrlKey: false });
+  assert.deepEqual(f.commits, ['b', 'b']);
+  f.stop();
+});
