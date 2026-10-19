@@ -6,3 +6,6 @@ review/
 .env
 .env.*
 *.log
+# Local conversation snapshots and screenshots stay on this computer.
+demo/design-lab/private/
+design/reviews/2026-10-19-design-lab/private/

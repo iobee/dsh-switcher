@@ -42,10 +42,14 @@ export function mountSwitcher(container, host) {
     for (const id of cycle.ids) {
       const row = host.row(id), node = rows.get(id);
       node.card.setAttribute('aria-selected', String(cycle.selected === id));
-      node.card.setAttribute('aria-label', `${row.title}，${row.label}${id === host.current() ? '，当前会话' : ''}。${row.text}`);
+      node.card.setAttribute('aria-label', `${row.workspaceName}，${row.title}，${row.label}${id === host.current() ? '，当前会话' : ''}`);
+      node.project.textContent = row.workspaceName; node.project.title = row.workspaceName;
       node.excerpt.textContent = row.text || row.placeholder;
+      node.excerpt.title = row.text || row.placeholder || '';
       node.excerpt.dataset.empty = String(!row.text);
       node.title.textContent = row.title; node.title.title = row.title;
+      node.status.dataset.status = row.kind; node.status.title = row.label;
+      node.statusLabel.textContent = row.shortLabel || row.label;
       node.icon.dataset.status = row.kind; node.icon.title = row.label;
       node.motion.update(row.kind, row.draft);
     }
@@ -92,12 +96,14 @@ export function mountSwitcher(container, host) {
     list = document.createElement('div'); list.className = 'dsh-switcher-list'; list.tabIndex = -1; list.style.outline = 'none'; list.setAttribute('role', 'listbox'); list.setAttribute('aria-label', '最近会话');
     ids.forEach((id, index) => {
       const card = document.createElement('div'); card.className = 'dsh-switcher-card'; card.id = `dsh-switcher-option-${index}`; card.setAttribute('role', 'option');
-      const body = document.createElement('div'); body.className = 'dsh-switcher-body';
-      const excerpt = document.createElement('p'); excerpt.className = 'dsh-switcher-excerpt'; body.append(excerpt);
-      const foot = document.createElement('div'); foot.className = 'dsh-switcher-foot';
-      const icon = document.createElement('span'); icon.className = 'dsh-switcher-icon';
-      const title = document.createElement('span'); title.className = 'dsh-switcher-title'; foot.append(icon, title); card.append(body, foot); list.append(card);
-      rows.set(id, { card, excerpt, title, icon, motion: { update() {} } });
+      const project = document.createElement('span'); project.className = 'dsh-switcher-project';
+      const title = document.createElement('span'); title.className = 'dsh-switcher-title';
+      const status = document.createElement('div'); status.className = 'dsh-switcher-status';
+      const icon = document.createElement('span'); icon.className = 'dsh-switcher-icon'; icon.setAttribute('aria-hidden', 'true');
+      const statusLabel = document.createElement('span'); statusLabel.className = 'dsh-switcher-status-label';
+      const excerpt = document.createElement('p'); excerpt.className = 'dsh-switcher-excerpt';
+      status.append(icon, statusLabel); card.append(project, title, status, excerpt); list.append(card);
+      rows.set(id, { card, project, title, status, statusLabel, excerpt, icon, motion: { update() {} } });
       // Pointer movement selects, without a stale hover overriding keyboard navigation.
       card.addEventListener('pointermove', event => { if (cycle && (event.movementX || event.movementY)) { cycle.select(id); refresh(); } });
       card.addEventListener('click', () => { if (cycle) { cycle.select(id); finish(true); } });

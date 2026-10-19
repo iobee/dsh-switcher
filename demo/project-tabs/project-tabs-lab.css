@@ -1,0 +1,30 @@
+.intro { padding-top: 42px; }
+.history-link { font-size: 11px; color: var(--secondary); }
+.shortlist { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; padding: 22px 0; }
+.tab-choice { text-align: left; border: 1px solid var(--line); border-radius: 9px; padding: 15px; background: transparent; min-width: 0; }
+.tab-choice[aria-pressed=true] { background: var(--control); border-color: var(--accent); }
+.tab-choice strong { display: block; font-size: 14px; font-weight: 500; }
+.tab-choice small { color: var(--secondary); font-size: 10px; font-weight: 400; margin-right: 10px; }
+.tab-choice > span { display: block; font-size: 11px; line-height: 1.7; color: var(--secondary); margin-top: 7px; }
+.explorations { color: var(--secondary); font-size: 11px; padding: 6px 0 20px; border-bottom: 1px solid var(--line); }
+.explorations summary { width: fit-content; padding: 6px 0; cursor: pointer; }
+.all-choices { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; padding-top: 15px; }
+.all-choices .tab-choice { padding: 12px; }
+.all-choices .tab-choice > span { font-size: 10px; }
+body:not([data-mode=single]) :is(.shortlist, .explorations) { display: none; }
+.comparison .compare-card { padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+.comparison .stage { height: 290px; }
+.comparison .gallery-title small { font-size: 11px; }
+.comparison .review-note { margin: 0; padding: 0 2px; color: var(--text); font-size: 11px; line-height: 1.7; }
+body[data-background=blue] { --theme-wash: #517d9b; }
+body[data-background=sage] { --theme-wash: #6f876b; }
+body[data-background=sand] { --theme-wash: #ab8d60; }
+body[data-background=plum] { --theme-wash: #8d708f; }
+body:not([data-background=host]) .stage::after { background: var(--theme-wash); opacity: .30; mix-blend-mode: color; }
+body:not([data-background=host]) .stage-backdrop { filter: saturate(.65); }
+@media (max-width: 740px) {
+  .shortlist { gap: 6px; } .tab-choice { padding: 10px; } .shortlist .tab-choice > span { font-size: 10px; }
+  .all-choices { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .history-link { font-size: 10px; } .intro { padding-top: 30px; }
+}
+@media (max-width: 420px) { .tab-choice strong { font-size: 12px; } .tab-choice small { margin-right: 5px; } }

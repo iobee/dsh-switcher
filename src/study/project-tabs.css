@@ -1,0 +1,65 @@
+/* All refinement rules are opt-in; production B and historical 04 stay intact. */
+.recognition-switcher[data-tab] {
+  --tab-cap: rgb(33 41 53 / .045); --tab-rule: rgb(33 41 53 / .08);
+  --tab-selected: rgb(255 255 255 / .76); --tab-selected-edge: rgb(255 255 255 / .88);
+  --tab-project: #565d67; --tab-note: #626975;
+  --sw-blue: #42658f; --sw-amber: #80612f;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Segoe UI", sans-serif;
+}
+.recognition-switcher[data-tab][data-theme=dark] {
+  --tab-cap: rgb(255 255 255 / .032); --tab-rule: rgb(255 255 255 / .065);
+  --tab-selected: rgb(255 255 255 / .073); --tab-selected-edge: rgb(255 255 255 / .055);
+  --tab-project: #c2c6ce; --tab-note: #a9afb9;
+  --sw-blue: #9db7d8; --sw-amber: #d3b684;
+}
+.recognition-switcher[data-tab] .recognition-card {
+  position: relative; border: 3px solid transparent; border-radius: 15px; background-clip: padding-box;
+  padding: 10px; grid-template-rows: 23px minmax(0, 1fr) 20px 16px; gap: 5px;
+}
+.recognition-switcher[data-tab] .recognition-project {
+  margin: -10px -10px 0; padding: 7px 10px 6px; height: 33px; border-radius: 11px 11px 0 0;
+  background: var(--tab-cap); color: var(--tab-project); font-size: 12px; line-height: 20px; font-weight: 550;
+  letter-spacing: 0;
+}
+.recognition-switcher[data-tab] .recognition-title {
+  font-size: 15px; line-height: 21px; font-weight: 550; letter-spacing: -.12px; -webkit-line-clamp: 2;
+}
+.recognition-switcher[data-tab] .recognition-status { font-size: 11.5px; line-height: 18px; font-weight: 500; gap: 5px; }
+.recognition-switcher[data-tab] .recognition-note { color: var(--tab-note); font-size: 11px; line-height: 16px; }
+.recognition-switcher[data-tab] .recognition-card[aria-selected=true] {
+  background-color: var(--tab-selected); box-shadow: inset 0 0 0 1px var(--tab-selected-edge);
+}
+.recognition-switcher[data-tab] .recognition-card[aria-selected=true] .recognition-project { color: var(--sw-ink); }
+.recognition-switcher[data-tab] .recognition-card[aria-selected=true] .recognition-title { font-weight: 600; }
+.recognition-switcher[data-tab=split] .recognition-card:not([aria-selected=true]) { background-color: rgb(127 127 127 / .025); box-shadow: inset 0 0 0 1px var(--tab-rule); }
+.recognition-switcher[data-tab=inset] .recognition-project { margin: -1px -2px 0; padding: 2px 5px; height: 25px; border-radius: 5px; }
+.recognition-switcher[data-tab=inset] .recognition-card { grid-template-rows: 28px minmax(0, 1fr) 20px 16px; }
+.recognition-switcher[data-tab=rule] .recognition-project { background: transparent; border-radius: 0; margin: -5px 0 0; padding: 1px 0 8px; height: 30px; border-bottom: 1px solid var(--tab-rule); }
+.recognition-switcher[data-tab=headline] .recognition-card { grid-template-rows: 19px minmax(0, 1fr) 20px 16px; }
+.recognition-switcher[data-tab=headline] .recognition-project { height: 29px; font-size: 11px; padding-top: 5px; }
+.recognition-switcher[data-tab=headline] .recognition-title { font-size: 17px; line-height: 24px; font-weight: 600; }
+.recognition-switcher[data-tab=center] :is(.recognition-project, .recognition-title, .recognition-note) { text-align: center; }
+.recognition-switcher[data-tab=center] .recognition-status { justify-content: center; }
+.recognition-switcher[data-tab=mono] .recognition-project { font-family: ui-monospace, "SFMono-Regular", Menlo, monospace; font-size: 11px; font-weight: 500; }
+.recognition-switcher[data-tab=accent] .recognition-card[aria-selected=true]::before { content: ''; position: absolute; width: 26px; height: 2px; top: 0; left: 10px; background: var(--sw-blue); border-radius: 2px; }
+.recognition-switcher[data-tab=solid] .dsh-switcher-panel { background: #edeef0; backdrop-filter: none; -webkit-backdrop-filter: none; }
+.recognition-switcher[data-tab=solid][data-theme=dark] .dsh-switcher-panel { background: #25272b; }
+/* The shortlisted directions share geometry and restrained semantic color. */
+.recognition-switcher[data-tab=soft] .recognition-card[aria-selected=true] { box-shadow: inset 0 0 0 1px var(--tab-selected-edge), 0 2px 4px rgb(20 25 35 / .035); }
+.recognition-switcher:is([data-tab=soft], [data-tab=joined], [data-tab=air]) .recognition-project { font-weight: 500; }
+.recognition-switcher:is([data-tab=soft], [data-tab=joined], [data-tab=air]) .recognition-card[aria-selected=true] .recognition-project { font-weight: 600; }
+.recognition-switcher[data-tab=joined] .recognition-card { border-width: 0; padding: 13px; border-radius: 12px; }
+.recognition-switcher[data-tab=joined] .recognition-project { margin: -13px -13px 0; padding: 10px 13px 6px; height: 36px; border-radius: 0; }
+.recognition-switcher[data-tab=joined] .recognition-card:first-child .recognition-project { border-top-left-radius: 12px; }
+.recognition-switcher[data-tab=joined] .recognition-card:last-child .recognition-project { border-top-right-radius: 12px; }
+.recognition-switcher[data-tab=joined] .recognition-card[aria-selected=true] .recognition-project { border-radius: 12px 12px 0 0; }
+.recognition-switcher[data-tab=warm] { --sw-tint: rgb(243 239 232 / .76); --sw-ink: #413d37; --tab-cap: rgb(113 91 61 / .048); --tab-project: #686157; --tab-note: #71695d; }
+.recognition-switcher[data-tab=warm][data-theme=dark] { --sw-tint: rgb(37 35 31 / .78); --sw-ink: #e8e2d9; --tab-cap: rgb(255 239 212 / .035); --tab-project: #c7beb0; --tab-note: #b5ada2; }
+.recognition-switcher[data-tab=air] .recognition-card:not([aria-selected=true]) .recognition-note { visibility: hidden; }
+.recognition-switcher[data-tab=air] .recognition-title { font-weight: 500; }
+.recognition-switcher[data-tab=air] .recognition-card[aria-selected=true] .recognition-title { font-weight: 550; }
+.recognition-switcher[data-tab][data-access=contrast] { --tab-project: #303640; --tab-note: #454b54; --tab-selected-edge: #616975; }
+.recognition-switcher[data-tab][data-access=contrast][data-theme=dark] { --tab-project: #edf0f5; --tab-note: #e1e4e9; --tab-selected-edge: #aab2c0; }
+@media (prefers-contrast: more) {
+  .recognition-switcher[data-tab] { --tab-project: var(--sw-ink); --tab-note: var(--sw-ink); --tab-selected-edge: var(--sw-muted); }
+}

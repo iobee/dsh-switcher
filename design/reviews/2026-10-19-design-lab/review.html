@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DSH Switcher · 本轮设计记录</title>
+<style>
+:root{color-scheme:light dark}*{box-sizing:border-box}body{margin:0;background:light-dark(#f8f8f6,#191a1c);color:light-dark(#30343a,#e2e4e8);font:14px/1.85 -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif}main{max-width:980px;margin:auto;padding:48px 28px 80px}a{color:inherit;text-underline-offset:4px}h1{font-weight:500;font-size:32px;line-height:1.4}h2{font-size:20px;font-weight:500;margin:42px 0 14px}p{max-width:800px}.meta{font-size:11px;opacity:.6;letter-spacing:1px}.lede{font-size:18px;line-height:1.85}.pair{display:grid;grid-template-columns:1fr 1fr;gap:16px}figure{margin:0}img{display:block;width:100%;border-radius:8px}figcaption{font-size:11px;opacity:.65;margin:8px 0}table{width:100%;border-collapse:collapse;font-size:12px}td,th{text-align:left;vertical-align:top;padding:14px 10px;border-bottom:1px solid #8883}th{font-weight:500;opacity:.6}.number{font-size:11px;opacity:.6;margin-right:8px}li{margin:9px 0}.callout{padding:22px 26px;border:1px solid #8883;border-radius:12px}.small{font-size:12px;opacity:.7}.wide{margin-top:20px}@media(max-width:600px){main{padding:28px 18px}h1{font-size:26px}.pair{grid-template-columns:1fr}td,th{padding:12px 5px}td:last-child,th:last-child{display:none}}
+</style></head>
+<body><main>
+<p class="meta">DSH SWITCHER / DESIGN STUDY / 2026.10.19</p>
+<h1>相同的形状，重新推敲分寸。</h1>
+<p class="lede">这轮的主张是让原文有阅读层次，让材质退到文字后面。先看 25「素笺」，再比较 26「墨透」和 27「书页」。28「随境」保留为主题适配方向。</p>
+<p><a href="../../../demo/design-lab/?v=25&theme=dark">打开 28 案研究台 →</a></p>
+<div class="callout">全部方案保留 942 × 190 外形、182 × 158 单项、158 × 106 内容面、20px 五拍图标。只研究内部文字排版、色阶、材质、透明度与选中细节。当前正式源码和安装版继续采用 B「轻透」。这里是浏览器设计样例。</div>
+<h2>从真实问题开始</h2>
+<ol>
+<li>用现有材质对照页打开 B「轻透」的明暗基准，截图观察。</li>
+<li>看同样的五段原文：正文与标题都偏同一字重，正文是一整块文字；短输入留下一块无组织的空白，长输入则更像文本框。</li>
+<li>看暗色层次：所有卡面都有亮度与独立阴影，选中项和正文各自争抢注意力。</li>
+<li>保持几何和图标，按文字、材质、细节、色温分别试验，再把有效部分汇入精修方案。</li>
+</ol>
+<div class="pair"><figure><img src="baseline-light.png" alt="当前 B 轻透亮色基准"><figcaption>B 轻透 · 亮色基准，浏览器 fixture。</figcaption></figure><figure><img src="baseline-dark.png" alt="当前 B 轻透暗色基准"><figcaption>B 轻透 · 暗色基准，背景来自之前保留的 DSH 截图。</figcaption></figure></div>
+<h2>取舍依据</h2>
+<p>重点看四件事：能否一眼认出会话；能否顺着原文读下去；选中项是否明确；材质是否与背景协调。没有把个人审美折算成貌似客观的分数。</p>
+<ul>
+<li><strong>首句与后文：</strong>只在原文已有标点处分开，前段 500 字重，后段保持可读的次级文字色。没有摘要、重写、关键词猜测或请求模型。</li>
+<li><strong>小卡片的空间：</strong>精修方案正文 14px / 21px，标题 13px；不增加重复标签。长内容保留原文，以四行截断。</li>
+<li><strong>文字与状态各有职责：</strong>文字负责辨认上次在说什么，五拍图标继续表示状态；不把装饰线条用作进度。</li>
+<li><strong>材质的职责：</strong>优先减弱内卡面边线和投影，再调整外壳透明度。选中态用稳定填充，无放大和额外位移动效。</li>
+<li><strong>性格的边界：</strong>宋体、引号、页边线都试过。它们更鲜明，也会减少可用空间或与代码内容冲突；保留可比较，不默认等同于更好。</li>
+</ul>
+<h2>四个值得继续的方向</h2>
+<table><thead><tr><th>方案</th><th>适合什么</th><th>代价</th></tr></thead><tbody>
+<tr><td>25 素笺</td><td>最均衡的日常版。中性薄面、自然字重分层，短中文和长句都可用。</td><td>克制的变化需要原尺寸比较，不能只看缩略图。</td></tr>
+<tr><td>26 墨透</td><td>更通透、更轻的材质。暗色卡面较少出现发亮的灰块。</td><td>高对比背景下，需要检查背景穿透是否影响读字。</td></tr>
+<tr><td>27 书页</td><td>更有文字性格。只把首句交给宋体，后文回到系统字体。</td><td>英文与代码场景不如素笺统一；依赖本地宋体可用性。</td></tr>
+<tr><td>28 随境</td><td>尽量跟随背景色，不固定在冷蓝或暖灰。</td><td>目前只验证模拟主题色；真实 DSH token 接入未实现。</td></tr>
+</tbody></table>
+<h2>28 案目录</h2>
+<table><thead><tr><th>方案</th><th>尝试</th><th>取舍</th></tr></thead><tbody id="variants"></tbody></table>
+<h2>参考与转化</h2>
+<p><a href="https://linear.app/now/how-we-redesigned-the-linear-ui">Linear 的界面重设计记录</a>强调减少视觉噪声、校准层次，并以少量基础色生成主题。这里借鉴的是中性透明层和主题关系，不照搬它的布局。</p>
+<p><a href="https://www.raycast.com/blog/a-fresh-look-and-feel">Raycast 的细节改版</a>保留核心操作，改进细微视觉和紧凑模式。这里借鉴的是高频工具的克制：不为表达设计感增加一个必须被读到的标签。</p>
+<p><a href="https://developer.apple.com/design/human-interface-guidelines/typography">Apple Typography</a> 与 <a href="https://developer.apple.com/design/human-interface-guidelines/materials">Materials</a> 用作字体层级、可读性和材质退化的原则索引；本轮官方页面正文未由网页读取器完整返回，因此不引用其中的精确尺寸或版本结论。</p>
+<h2>验证与边界</h2>
+<p id="verification">语法与仓库内资源引用检查通过；原有 12 项测试通过。浏览器完成 56 组明暗尺寸与逐字原文核对，56 组 480px 窄窗末项可见性检查，精修四案 24 组长文/混排/边界状态，16 组可读性退化，以及 28「随境」的 10 组模拟主题色。原文切分另核对了 27 种文本，拼接结果与输入完全一致。</p>
+<p>目视比较覆盖全部 28 案的明暗截图。修正了 27「书页」混排行高从最高 86px 超出正文可用 84px 的问题，以及无标点长段落被整段加重的问题。辅助媒体偏好模拟下，模糊关闭，完整五拍图形保持静止。未进行 VoiceOver、真实系统合成或真实宿主快捷键的新一轮验证，也不以截图声明完整无障碍合规。</p>
+<p class="small">可复核记录：<a href="verification.json">检查汇总</a> · <a href="geometry.json">明暗尺寸</a> · <a href="narrow.json">窄窗</a> · <a href="stress.json">文本压力测试</a> · <a href="accessibility.json">材质退化</a> · <a href="themes.json">模拟主题</a>。检查数量只表示本轮浏览器样例的覆盖，不能代替 DSH 插件验证。</p>
+<p class="small">研究台不读取真实会话、不保存输入原文、不调用模型、不更改主题设置；刷新后恢复虚构文案。候选编号在 URL 中可分享复现，加入比较的选择只存在当前页面内存。五拍动效直接复用正式模块，历史基线与插件源码保留。</p>
+</main><script type="module" src="review.js"></script></body></html>

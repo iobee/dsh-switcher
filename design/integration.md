@@ -8,6 +8,7 @@
 | --- | --- |
 | 会话标题、最近活动、空白判断 | `sessions.list` |
 | 当前会话 | `sidebarRight.mounted` |
+| 项目名称与归属 | `workspaces.list.items[].title / sessionIds`；未分组回退 `sessions.list.byId[id].cwd` 目录名 |
 | 归档排除 | `workspaces.list.archivedSessionIds` |
 | 运行、等待用户、未读结果 | `uiSession.sessionStatus` |
 | 最新用户输入 | 保留的 Session `eventSource` 中最后一条人类 `user/message` |
@@ -29,7 +30,7 @@
 
 **当前限制：**焦点位于独立内嵌网页或 iframe 内部时，事件不会冒泡到主文档，因此不支持从这些区域唤起。不能重新注册原生 Ctrl + Tab 来假装覆盖该场景，否则会恢复已复现的松键故障。终端入口与 Windows 仍需分别原生验证。
 
-## 已执行验证
+## 历史 0.1.2 验证
 
 - `npm test`：12 项通过，包含 MRU/归档/空白过滤、正反循环与冻结、原文提取、状态优先级、真实接口形状及引用释放；并覆盖完整按下/松开、双 Control、Esc 取消、组合输入和卸载监听。
 - `npm run check`：语法与本地资源引用。
@@ -49,3 +50,16 @@
 - 本轮桌面捕获只返回台前调度缩略图，因此没有把它作为原生材质的精细视觉证明，也未声称完成原生明暗截图验证。浏览器验证和用户在 DSH 的最终视觉体验分开记录。
 
 更新前已备份 Switcher 及配置。其他插件在本轮期间有独立版本更新，因此回退应仅重装 Switcher 的旧包，不整体覆盖 profile 备份。此次 Switcher 更新前后的 `cordis.yml`、`cordis.patch.yml`、`pnpm-workspace.yaml` 一致。
+
+
+## 0.1.4 · 01「分签」· 2026-10-19
+
+用户最终选择 01 后，将独立项目题签、两行标题、固定状态行与单行次要原话接入正式视图。项目归属按安装宿主的公共 `workspaces.list.items[].sessionIds` 查找，显示 `title`；回退到工作区路径或会话 `cwd` 的目录名，没有信息时显示「未分组」。核对依据为宿主 `dsh-api-workspace-controller` 的 `workspaceView` / `buildSnapshot` 以及 `dsh-client-ui-workspace` 的 `labelOf`。没有根据路径猜测已归属会话的项目名称。
+
+- 工作区订阅实时更新改名与归属。状态短标签保留「待确认」和「待回应」的区别，并可并列「有草稿」；辅助名称保留完整状态语义。
+- `npm test` 14 项通过；新增工作区命名回退、状态短标签和改名/归属更新检查。原有键盘、MRU、引用释放及草稿处理保持。
+- 浏览器使用正式 `view.js`、`core.js`、`motion.js`、`switcher.css`：1280×720 明暗均为 942×190 / 182×158；480×720 下外框 448×190，末项滚动位置 494px 且完整可见。长名称、两行标题、单行摘录、状态并存、动态改名、取消、确认、草稿保留与卸载通过。
+- 所有图标仍为 family 11；减少动态效果后两次图形采样一致，减少透明度/增强对比度时关闭背景模糊并强化选中边界。控制台无 error。
+- 完整设计比较见项目根目录 `design-qa.md`；公开样例截图在 `reviews/2026-10-19-split-production/`，真实聊天比较图只在忽略目录。
+
+本轮构建、打包与 push，不更新已安装 DSH。因此上述新增 UI 和工作区数据映射尚未在宿主实机联调；0.1.2 的真实松键证据与 0.1.3 的安装记录不当作 0.1.4 的安装验证。

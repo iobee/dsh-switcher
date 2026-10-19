@@ -62,18 +62,26 @@ export function hasDraft(value) {
   return typeof draft === 'string' && draft.trim().length > 0;
 }
 
+// Match DSH's workspace membership first; cwd is only an ungrouped fallback.
+export function sessionWorkspaceName(snapshot, id, summary) {
+  const workspace = snapshot.items?.find(item => item.sessionIds.includes(id));
+  const basename = path => typeof path === 'string' ? path.trim().split(/[\\/]+/).filter(Boolean).at(-1) || path.trim() : '';
+  return workspace?.title?.trim() || basename(workspace?.path) || basename(summary?.cwd) || '未分组';
+}
+
 export function sessionPresentation(status, summary, draft = false) {
-  let kind = 'idle', label = '会话已就绪';
+  let kind = 'idle', label = '会话已就绪', shortLabel = '已就绪';
   if (status?.pendingInteraction) {
     kind = 'approval';
     label = status.pendingInteraction.kind === 'approval' ? '等待用户确认' : '等待用户回应';
+    shortLabel = status.pendingInteraction.kind === 'approval' ? '待确认' : '待回应';
   } else if (status?.running ?? summary?.running) {
-    kind = 'running'; label = '运行中';
+    kind = 'running'; label = shortLabel = '运行中';
   } else if (status?.completionUnread) {
-    kind = 'unread'; label = '有新结果';
+    kind = 'unread'; label = '有新结果'; shortLabel = '新结果';
   } else if (draft) {
-    kind = 'draft'; label = '有草稿';
+    kind = 'draft'; label = shortLabel = '有草稿';
   }
-  if (draft && kind !== 'draft') label += '，有草稿';
-  return { kind, label, draft };
+  if (draft && kind !== 'draft') { label += '，有草稿'; shortLabel += ' · 有草稿'; }
+  return { kind, label, shortLabel, draft };
 }

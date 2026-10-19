@@ -1,0 +1,14 @@
+.history-link { font-size: 11px; color: var(--secondary); }
+.recognition-choices { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 9px; padding: 24px 0; }
+.recognition-choice { text-align: left; border: 1px solid var(--line); border-radius: 9px; padding: 13px; background: transparent; min-width: 0; }
+.recognition-choice[aria-pressed=true] { background: var(--control); border-color: var(--accent); }
+.recognition-choice strong { display: block; font-size: 13px; font-weight: 500; }
+.recognition-choice small { color: var(--secondary); font-size: 10px; font-weight: 400; margin-right: 9px; }
+.recognition-choice > span { display: block; font-size: 10px; line-height: 1.6; color: var(--secondary); margin-top: 6px; }
+.recognition-choice[data-recommended=true] strong::after { content: ' ·'; color: var(--accent); }
+body[data-mode=compare] .recognition-choices { display: none; }
+.comparison .compare-card { padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+.comparison .compare-note { margin-bottom: 0; }
+.comparison .gallery-title small { font-size: 11px; }
+.comparison .stage-caption { font-size: 9px; }
+@media (max-width: 740px) { .recognition-choices { grid-template-columns: repeat(2, minmax(0, 1fr)); } .history-link { font-size: 10px; } }

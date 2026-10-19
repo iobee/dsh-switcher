@@ -1,0 +1,54 @@
+[
+  {
+    "comparisons": [],
+    "documentWidth": 390,
+    "mode": "single",
+    "theme": "light",
+    "width": 390
+  },
+  {
+    "comparisons": [],
+    "documentWidth": 390,
+    "mode": "all",
+    "theme": "light",
+    "width": 390
+  },
+  {
+    "comparisons": [
+      true,
+      true,
+      true,
+      true
+    ],
+    "documentWidth": 390,
+    "mode": "compare",
+    "theme": "light",
+    "width": 390
+  },
+  {
+    "comparisons": [],
+    "documentWidth": 390,
+    "mode": "single",
+    "theme": "dark",
+    "width": 390
+  },
+  {
+    "comparisons": [],
+    "documentWidth": 390,
+    "mode": "all",
+    "theme": "dark",
+    "width": 390
+  },
+  {
+    "comparisons": [
+      true,
+      true,
+      true,
+      true
+    ],
+    "documentWidth": 390,
+    "mode": "compare",
+    "theme": "dark",
+    "width": 390
+  }
+]

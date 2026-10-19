@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DSH Switcher · 先认出会话</title>
+  <link rel="stylesheet" href="../../design/archive/session-material-b/switcher.css">
+  <link rel="stylesheet" href="../../src/study/surfaces.css">
+  <link rel="stylesheet" href="../../src/study/recognition.css">
+  <link rel="stylesheet" href="../design-lab/lab.css">
+  <link rel="stylesheet" href="recognition-lab.css">
+</head>
+<body data-theme="dark" data-mode="single">
+  <header class="masthead"><a class="wordmark" href="./">DSH <span>Switcher</span></a><a class="history-link" href="../design-lab/?v=25&theme=dark&scene=real&workspace=0">保留的上一版 ↗</a></header>
+  <main>
+    <section class="intro">
+      <p class="eyebrow">PROJECT · STATUS · TITLE</p>
+      <h1>先认出会话，再看一句线索。</h1>
+      <p class="intro-copy">8 种信息排布，用同一组会话比较。项目、状态与标题是主角，最后输入只作辅助。</p>
+      <p class="boundary">浏览器设计研究 · 状态为演示 · 五拍图标与 942 × 190 外框保留</p>
+    </section>
+    <div class="toolbar">
+      <div class="segmented" aria-label="查看方式"><button data-mode="single" aria-pressed="true">单版细看</button><button data-mode="compare" aria-pressed="false">8 版对照</button></div>
+      <div class="toolbar-end"><div class="segmented" aria-label="明暗外观"><button data-theme="light" aria-pressed="false">亮色</button><button data-theme="dark" aria-pressed="true">暗色</button></div><button id="baseline-hold" class="text-button" aria-pressed="false">按住看上一版</button></div>
+    </div>
+    <section class="single-view" id="single-view" aria-label="当前排布预览">
+      <div class="variant-heading"><div><span class="variant-number" id="layout-number">01</span><h2 id="layout-name">项目索引</h2><span class="verdict" id="layout-summary"></span></div><div class="variant-actions"><button id="previous" class="arrow-button" aria-label="上一个排布">←</button><button id="next" class="arrow-button" aria-label="下一个排布">→</button><button class="text-button" id="immersive">原尺寸体验</button></div></div>
+      <div class="stage" id="main-stage"><div class="stage-backdrop" aria-hidden="true"></div><div id="main-mount" class="stage-mount"></div><span class="stage-caption" id="stage-source">浏览器样例</span><button id="reopen" class="reopen" hidden>重新打开样例</button></div>
+      <div class="rationale"><p id="detail"></p><p class="tradeoff"><span>取舍</span><span id="tradeoff"></span></p></div>
+    </section>
+    <section class="scenario-bar" aria-label="场景控制">
+      <label>文案<select id="scene" aria-label="文案"><option id="scene-real" value="real" hidden disabled>Codex 真实对话</option><option value="daily">原示例</option><option value="stress">长名称压力</option><option value="edge">空白与特殊文字</option></select></label>
+      <label>材质<select id="material" aria-label="材质"><option value="quiet">素笺 · 中性</option><option value="ink">墨透 · 轻透</option><option value="vellum">暖纸</option><option value="baseline">B · 轻透基准</option></select></label>
+      <label>可读性<select id="access" aria-label="可读性"><option value="normal">标准</option><option value="solid">减少透明度</option><option value="contrast">增强对比度</option></select></label>
+      <span class="scenario-note" id="source-note">项目与原话来自 Codex · 状态为演示</span>
+    </section>
+    <nav class="recognition-choices" id="layout-choices" aria-label="选择信息排布"></nav>
+    <section id="comparison" class="comparison" aria-label="8 版排布对照" hidden></section>
+    <footer class="study-footer"><p>先看 01「项目索引」、05「选中再读」与 06「共用旁注」。按方向键切换选中项，观察最后输入什么时候出现、出现在什么位置。</p><p>Enter 演示切换，Esc 收起。这里是本地设计样例，状态图标为演示，当前安装版仍为 B「轻透」。</p></footer>
+  </main>
+  <div class="immersive-bar" hidden><button class="text-button" id="exit-immersive">返回比较台</button><span id="immersive-label"></span><button class="text-button" id="immersive-theme">切换明暗</button></div>
+  <div id="notice" role="status" aria-live="polite"></div>
+  <script type="module" src="../../src/study/recognition-lab.js"></script>
+</body>
+</html>

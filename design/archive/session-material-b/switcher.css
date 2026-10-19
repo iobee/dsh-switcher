@@ -1,0 +1,60 @@
+.dsh-switcher {
+  /* Selected B material: translucent shell and cards on one blurred backdrop. */
+  --sw-tint: rgb(241 243 246 / .58); --sw-edge: rgb(255 255 255 / .85);
+  --sw-ink: #30343a; --sw-muted: #61666b; --sw-faint: #81858c;
+  --sw-selection: rgb(38 49 72 / .065); --sw-fill: rgb(255 255 255 / .57); --sw-card-edge: rgb(255 255 255 / .65);
+  --sw-blue: #55749c; --sw-amber: #967747; --sw-opaque: #f1f3f5;
+  --sw-card-shadow: 0 1px 2px rgb(28 31 35 / .04), 0 4px 12px rgb(28 31 35 / .025);
+  --sw-shadow: 0 16px 38px rgb(18 20 24 / .12), 0 0 0 1px rgb(30 32 36 / .045), inset 0 1px rgb(255 255 255 / .60);
+  position: fixed; inset: 0; z-index: 10000; display: flex; align-items: center; justify-content: center;
+  color: var(--sw-ink); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  pointer-events: auto; outline: none; isolation: isolate;
+}
+.dsh-switcher[data-theme=dark] {
+  --sw-tint: rgb(39 40 42 / .58); --sw-edge: rgb(255 255 255 / .115);
+  --sw-ink: #e1e3e6; --sw-muted: #b4b8be; --sw-faint: #979da6; --sw-selection: rgb(255 255 255 / .07);
+  --sw-fill: rgb(255 255 255 / .052); --sw-card-edge: rgb(255 255 255 / .05); --sw-opaque: #27282a;
+  --sw-blue: #95aed0; --sw-amber: #c4a975;
+  --sw-card-shadow: inset 0 1px rgb(255 255 255 / .025), 0 2px 5px rgb(0 0 0 / .10);
+  --sw-shadow: 0 18px 40px rgb(0 0 0 / .27), 0 2px 6px rgb(0 0 0 / .13), inset 0 1px rgb(255 255 255 / .045);
+}
+.dsh-switcher *, .dsh-switcher *::before, .dsh-switcher *::after { box-sizing: border-box; }
+.dsh-switcher[data-revealed=false] .dsh-switcher-panel { visibility: hidden; }
+.dsh-switcher-panel {
+  box-sizing: border-box; width: min(var(--sw-width, 942px), calc(100vw - 32px)); padding: 15px; margin: 0;
+  border: 1px solid var(--sw-edge); border-radius: 24px; background: var(--sw-tint); box-shadow: var(--sw-shadow);
+  backdrop-filter: blur(48px) saturate(108%); -webkit-backdrop-filter: blur(48px) saturate(108%);
+  outline: none;
+}
+.dsh-switcher-list { display: flex; overflow: auto; scrollbar-width: none; overscroll-behavior: contain; }
+.dsh-switcher-list::-webkit-scrollbar { display: none; }
+.dsh-switcher-card {
+  flex: 0 0 182px; width: 182px; height: 158px; padding: 11px; border: 1px solid transparent;
+  border-radius: 14px; background: transparent; cursor: default; min-width: 0;
+}
+.dsh-switcher-card[aria-selected=true] { background: var(--sw-selection); }
+.dsh-switcher-body {
+  height: 106px; padding: 10px; border-radius: 6px; border: 1px solid var(--sw-card-edge);
+  background: var(--sw-fill); box-shadow: var(--sw-card-shadow); overflow: hidden;
+}
+.dsh-switcher-excerpt {
+  margin: 0; padding: 0; color: var(--sw-ink); font-size: 14px; line-height: 20px; font-weight: 400;
+  overflow-wrap: anywhere; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;
+}
+.dsh-switcher-excerpt[data-empty=true] { color: var(--sw-faint); }
+.dsh-switcher-foot { height: 16px; margin-top: 12px; display: flex; align-items: center; gap: 4px; }
+.dsh-switcher-icon { flex: 0 0 20px; width: 20px; height: 20px; margin-left: -2px; color: var(--sw-faint); }
+.dsh-switcher-icon svg { display: block; width: 20px; height: 20px; overflow: visible; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; }
+.dsh-switcher-icon[data-status=running], .dsh-switcher-icon[data-status=unread] { color: var(--sw-blue); }
+.dsh-switcher-icon[data-status=approval] { color: var(--sw-amber); }
+.dsh-switcher-title { min-width: 0; color: var(--sw-muted); font-size: 14px; line-height: 16px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; font-weight: 400; }
+.dsh-switcher-card[aria-selected=true] .dsh-switcher-title { color: var(--sw-ink); }
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+  .dsh-switcher-panel { background: var(--sw-opaque); backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .dsh-switcher-body { background: #fff; }
+  .dsh-switcher[data-theme=dark] .dsh-switcher-body { background: #353638; }
+}
+@media (prefers-contrast: more) {
+  .dsh-switcher-card[aria-selected=true] { border-color: var(--sw-muted); }
+  .dsh-switcher-title, .dsh-switcher-icon { color: var(--sw-ink) !important; }
+}

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DSH Switcher · 文字与材质的 28 次尝试</title>
+  <link rel="stylesheet" href="../../design/archive/session-material-b/switcher.css">
+  <link rel="stylesheet" href="../../src/study/surfaces.css">
+  <link rel="stylesheet" href="lab.css">
+</head>
+<body data-theme="dark" data-mode="single">
+  <header class="masthead">
+    <a class="wordmark" href="?v=25&theme=dark">DSH <span>Switcher</span></a>
+    <span class="edition">设计研究 <i></i> 2026.10.19</span>
+  </header>
+  <main>
+    <section class="intro">
+      <p class="eyebrow">TYPE · SURFACE · LIGHT</p>
+      <h1>会话之间，留一点余白。</h1>
+      <p class="intro-copy">28 次文字与材质的尝试。相同的形状、相同的原话，细看每一种分寸。</p>
+      <p class="boundary">本地设计样例 · 当前安装版仍是 B「轻透」</p>
+    </section>
+    <div class="toolbar" aria-label="设计研究控件">
+      <div class="segmented" aria-label="查看方式">
+        <button data-mode="single" aria-pressed="true">单案细看</button>
+        <button data-mode="all" aria-pressed="false">全部 28 案</button>
+        <button data-mode="compare" aria-pressed="false">精选比较 <span id="compare-count">4</span></button>
+      </div>
+      <div class="toolbar-end">
+        <div class="segmented theme-toggle" aria-label="明暗外观">
+          <button data-theme="light" aria-pressed="false">亮色</button>
+          <button data-theme="dark" aria-pressed="true">暗色</button>
+        </div>
+        <button class="text-button" id="baseline-hold" aria-pressed="false">按住看 B 基准</button>
+      </div>
+    </div>
+    <section class="single-view" id="single-view" aria-label="单案预览">
+      <div class="variant-heading">
+        <div><span class="variant-number" id="variant-number">25</span><h2 id="variant-name">素笺</h2><span class="verdict" id="verdict">首选 · 日常使用</span></div>
+        <div class="variant-actions">
+          <button class="text-button" id="pin" aria-pressed="true">已加入比较</button>
+          <button class="arrow-button" id="previous" aria-label="上一个方案">←</button>
+          <button class="arrow-button" id="next" aria-label="下一个方案">→</button>
+          <button class="text-button" id="immersive">原尺寸体验</button>
+        </div>
+      </div>
+      <div class="stage" id="main-stage">
+        <div class="stage-backdrop" aria-hidden="true"></div>
+        <div class="stage-mount" id="main-mount"></div>
+        <span class="stage-caption">DSH 截图背景 · 浏览器样例</span>
+        <button id="reopen" class="reopen" hidden>重新打开样例</button>
+      </div>
+      <div class="rationale">
+        <p id="detail"></p>
+        <p class="tradeoff"><span>取舍</span><span id="caution"></span></p>
+      </div>
+    </section>
+    <section class="scenario-bar" aria-label="场景与可读性">
+      <label>文案<select id="scene" aria-label="文案"><option id="scene-real" value="real" hidden disabled>Codex 真实对话</option><option value="daily">日常中文 · 原示例</option><option value="long">长句与短句</option><option value="mixed">英文与代码</option><option value="edge">边界状态</option></select></label>
+      <label>背景<select id="palette" aria-label="背景"><option value="neutral">DSH 默认</option><option value="blue">蓝灰 · 模拟</option><option value="sage">青绿 · 模拟</option><option value="sand">暖沙 · 模拟</option><option value="plum">灰紫 · 模拟</option></select></label>
+      <label>可读性<select id="access" aria-label="可读性"><option value="normal">标准材质</option><option value="solid">减少透明度</option><option value="contrast">增强对比度</option></select></label>
+      <button id="workspace-toggle" class="text-button" aria-pressed="true" aria-label="显示所属项目和 Workspace">项目 / Workspace</button>
+      <span class="scenario-note" id="content-source">原文保留 · 五拍图标保留 · 942 × 190</span>
+    </section>
+    <section class="variant-browser" id="variant-browser" aria-label="选择方案">
+      <nav class="filter-tabs" id="filters" aria-label="方案类别"></nav>
+      <div class="variant-strip" id="variant-strip"></div>
+    </section>
+    <section id="gallery" class="gallery" aria-label="全部方案总览" hidden></section>
+    <section id="comparison" class="comparison" aria-label="所选方案比较" hidden></section>
+    <details class="custom-input">
+      <summary>用自己的文字试试看</summary>
+      <label for="custom-text">替换第二张卡片的摘录，仅在当前页面临时使用。</label>
+      <textarea id="custom-text" rows="3" placeholder="粘贴一段平时会说的话，看看长短句和中英文混排。"></textarea>
+      <button id="reset-text" class="text-button">恢复当前场景原文</button>
+    </details>
+    <footer class="study-footer">
+      <p>先看 25「素笺」的明暗，再比较 26「墨透」与 27「书页」。28「随境」可配合上面的模拟主题观察。</p>
+      <p>卡片内用方向键选择，Enter 演示切换，Esc 收起。<span id="scene-description">当前使用虚构文案。原生快捷键与宿主接入仍以正式版验证为准。</span></p>
+      <p class="source-links">参考研究：<a href="https://linear.app/now/how-we-redesigned-the-linear-ui" target="_blank" rel="noreferrer">Linear · 层次与主题</a><span> / </span><a href="https://www.raycast.com/blog/a-fresh-look-and-feel" target="_blank" rel="noreferrer">Raycast · 克制的细节</a><span> / </span><a href="../../design/reviews/2026-10-19-design-lab/review.html">阅读本轮设计记录</a></p>
+    </footer>
+  </main>
+  <div class="immersive-bar" hidden><button class="text-button" id="exit-immersive">返回研究台</button><span id="immersive-label"></span><button class="text-button" id="immersive-theme">切换明暗</button></div>
+  <div id="notice" role="status" aria-live="polite"></div>
+  <script type="module" src="../../src/study/lab.js"></script>
+</body>
+</html>

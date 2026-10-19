@@ -1,0 +1,48 @@
+.recognition-switcher .recognition-card {
+  display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: 18px minmax(0, 1fr) 20px 17px;
+  grid-template-areas: 'project' 'title' 'status' 'note'; gap: 4px; padding: 12px;
+}
+.recognition-switcher .recognition-card[aria-selected=true] { background: var(--sw-selection); }
+.recognition-project { grid-area: project; color: var(--sw-muted); font-size: 12px; line-height: 18px; font-weight: 550; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; min-width: 0; }
+.recognition-title { grid-area: title; align-self: start; min-width: 0; color: var(--sw-ink); font-size: 15px; font-weight: 550; line-height: 21px; letter-spacing: -.15px; overflow-wrap: anywhere; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
+.recognition-status { grid-area: status; display: flex; align-items: center; gap: 5px; min-width: 0; height: 20px; color: var(--sw-muted); font-size: 10.5px; line-height: 15px; }
+.recognition-switcher .dsh-switcher-icon { margin: 0; }
+.recognition-status[data-status=running], .recognition-status[data-status=unread] { color: var(--sw-blue); }
+.recognition-status[data-status=approval] { color: var(--sw-amber); }
+.recognition-note { grid-area: note; min-width: 0; color: var(--sw-muted); font-size: 11px; font-weight: 400; line-height: 17px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.recognition-note[data-empty=true] { color: var(--sw-faint); }
+.recognition-card[aria-selected=true] .recognition-project { color: var(--sw-ink); }
+.recognition-switcher[data-layout=headline] .recognition-card { grid-template-rows: minmax(0, 1fr) 18px 20px 17px; grid-template-areas: 'title' 'project' 'status' 'note'; }
+.recognition-switcher[data-layout=headline] .recognition-title { font-size: 16px; line-height: 22px; font-weight: 600; -webkit-line-clamp: 2; }
+.recognition-switcher[data-layout=headline] .recognition-project { font-size: 11px; font-weight: 450; }
+.recognition-switcher[data-layout=status] .recognition-card { grid-template-rows: 24px 18px minmax(0, 1fr) 17px; grid-template-areas: 'status' 'project' 'title' 'note'; }
+.recognition-switcher[data-layout=status] .recognition-status { font-size: 12px; font-weight: 550; }
+.recognition-switcher[data-layout=status] .recognition-title { -webkit-line-clamp: 2; }
+.recognition-switcher[data-layout=tab] .recognition-card { grid-template-rows: 32px minmax(0, 1fr) 20px 17px; border-color: var(--sw-card-edge); }
+.recognition-switcher[data-layout=tab] .recognition-project { margin: -12px -12px 0; padding: 9px 12px 5px; height: 40px; background: var(--sw-fill); border-radius: 12px 12px 0 0; color: var(--sw-ink); font-size: 12px; }
+.recognition-switcher[data-layout=tab] .recognition-title { -webkit-line-clamp: 2; }
+.recognition-switcher[data-layout=selected] .recognition-card:not([aria-selected=true]) .recognition-note { visibility: hidden; }
+.recognition-switcher[data-layout=selected] .recognition-title { font-size: 15.5px; font-weight: 600; }
+.recognition-switcher[data-layout=shared] .recognition-card { height: 124px; grid-template-rows: 18px minmax(0, 1fr) 20px; grid-template-areas: 'project' 'title' 'status'; }
+.recognition-switcher[data-layout=shared] .recognition-title { -webkit-line-clamp: 2; }
+.recognition-switcher[data-layout=shared] .recognition-note { display: none; }
+.recognition-shared { height: 22px; margin-top: 12px; padding: 0 12px; display: flex; align-items: center; gap: 12px; min-width: 0; color: var(--sw-muted); }
+.recognition-shared[hidden] { display: none; }
+.recognition-shared-label { font-size: 10px; flex: 0 0 auto; }
+.recognition-shared-text { font-size: 12px; line-height: 20px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.recognition-switcher[data-layout=rail] .recognition-card { grid-template-columns: 32px minmax(0, 1fr); grid-template-rows: 18px minmax(0, 1fr) 17px; grid-template-areas: 'project project' 'status title' 'note note'; gap: 6px 8px; }
+.recognition-switcher[data-layout=rail] .recognition-status { flex-direction: column; align-items: center; gap: 5px; height: auto; padding-top: 3px; }
+.recognition-switcher[data-layout=rail] .recognition-status-label { width: 32px; text-align: center; font-size: 10px; line-height: 14px; }
+.recognition-switcher[data-layout=rows] .recognition-list { display: block; height: 158px; overflow: hidden; }
+.recognition-switcher[data-layout=rows] .recognition-card { width: 100%; height: 31.6px; display: grid; grid-template-columns: 128px 72px 250px minmax(0, 1fr); grid-template-rows: 20px; grid-template-areas: 'project status title note'; gap: 12px; align-items: center; border: 0; border-radius: 7px; padding: 5.8px 8px; }
+.recognition-switcher[data-layout=rows] .recognition-project { font-size: 11px; font-weight: 450; }
+.recognition-switcher[data-layout=rows] .recognition-title { font-size: 13px; font-weight: 500; line-height: 20px; display: block; white-space: nowrap; text-overflow: ellipsis; }
+.recognition-switcher[data-layout=rows] .recognition-note { font-size: 11px; }
+@media (max-width: 1000px) {
+  .recognition-switcher[data-layout=rows] .recognition-card { grid-template-columns: 115px 66px minmax(0, 1fr); grid-template-areas: 'project status title'; gap: 8px; }
+  .recognition-switcher[data-layout=rows] .recognition-note { display: none; }
+}
+@media (max-width: 540px) {
+  .recognition-switcher[data-layout=rows] .recognition-card { grid-template-columns: 96px 20px minmax(0, 1fr); }
+  .recognition-switcher[data-layout=rows] .recognition-status-label { display: none; }
+}

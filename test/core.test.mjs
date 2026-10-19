@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readHistory, remember, candidates, SwitchCycle, latestUserInput, hasDraft, sessionPresentation } from '../src/plugin/core.js';
+import { readHistory, remember, candidates, SwitchCycle, latestUserInput, hasDraft, sessionPresentation, sessionWorkspaceName } from '../src/plugin/core.js';
 
 test('MRU survives malformed storage and only contains unique ids', () => {
   assert.deepEqual(readHistory('{'), []);
@@ -53,4 +53,22 @@ test('host attention wins over running; unread and draft remain distinct', () =>
   assert.equal(sessionPresentation({ completionUnread: true }, {}, true).kind, 'unread');
   assert.equal(sessionPresentation({}, {}, true).kind, 'draft');
   assert.equal(hasDraft({ text: '  ' }), false); assert.equal(hasDraft({ text: '未发送' }), true);
+});
+
+test('compact status keeps approval, response and coexisting draft distinguishable', () => {
+  assert.equal(sessionPresentation({ pendingInteraction: { kind: 'approval' } }, {}, true).shortLabel, '待确认 · 有草稿');
+  assert.equal(sessionPresentation({ pendingInteraction: { kind: 'question' } }, {}).shortLabel, '待回应');
+  assert.equal(sessionPresentation({ running: true }, {}, true).shortLabel, '运行中 · 有草稿');
+  assert.equal(sessionPresentation({ completionUnread: true }, {}, true).shortLabel, '新结果 · 有草稿');
+  assert.equal(sessionPresentation({}, {}).shortLabel, '已就绪');
+});
+
+test('workspace title follows authoritative membership and falls back to directory or ungrouped', () => {
+  const snapshot = { items: [{ workspaceId: 'w', title: '自定义项目名', path: '/code/old-name', sessionIds: ['a'] }] };
+  assert.equal(sessionWorkspaceName(snapshot, 'a', { cwd: '/code/old-name' }), '自定义项目名');
+  assert.equal(sessionWorkspaceName(snapshot, 'b', { cwd: '/code/other-project/' }), 'other-project');
+  assert.equal(sessionWorkspaceName(snapshot, 'c', { cwd: 'C:\\code\\Windows Project\\' }), 'Windows Project');
+  assert.equal(sessionWorkspaceName(snapshot, 'd', {}), '未分组');
+  assert.equal(sessionWorkspaceName({ items: [{ title: ' ', path: '/code/fallback/', sessionIds: ['a'] }] }, 'a'), 'fallback');
+  assert.equal(sessionWorkspaceName({}, 'a'), '未分组');
 });

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DSH Switcher · 项目题签精修</title>
+  <link rel="stylesheet" href="../../design/archive/session-material-b/switcher.css">
+  <link rel="stylesheet" href="../../src/study/surfaces.css">
+  <link rel="stylesheet" href="../../src/study/recognition.css">
+  <link rel="stylesheet" href="../../src/study/project-tabs.css">
+  <link rel="stylesheet" href="../design-lab/lab.css">
+  <link rel="stylesheet" href="project-tabs-lab.css">
+</head>
+<body data-theme="dark" data-mode="single">
+  <header class="masthead"><a class="wordmark" href="./">DSH <span>Switcher</span></a><a class="history-link" href="../recognition/?layout=tab&theme=dark&scene=real">保留的 04 项目题签 ↗</a></header>
+  <main>
+    <section class="intro">
+      <p class="eyebrow">PROJECT TABS · REFINED</p>
+      <h1>题签清楚，其他轻一点。</h1>
+      <p class="intro-copy">沿着 04 项目题签，保留 12 种细化。你最终选定了 01「分签」，已接入正式插件。</p>
+      <p class="boundary">同一组 Codex 文案 · 状态为演示 · 942 × 190 · 完整五拍图标</p>
+    </section>
+    <div class="toolbar">
+      <div class="segmented" aria-label="查看方式"><button data-mode="single" aria-pressed="true">单版细看</button><button data-mode="compare" aria-pressed="false">精选 3 版</button><button data-mode="all" aria-pressed="false">全部 12 版</button></div>
+      <div class="toolbar-end"><div class="segmented" aria-label="明暗外观"><button data-theme="light" aria-pressed="false">亮色</button><button data-theme="dark" aria-pressed="true">暗色</button></div><button id="baseline-hold" class="text-button" aria-pressed="false">按住看原案 04</button></div>
+    </div>
+    <section class="single-view" id="single-view" aria-label="项目题签预览">
+      <div class="variant-heading"><div><span class="variant-number" id="layout-number">09</span><h2 id="layout-name">轻签</h2><span class="verdict" id="layout-summary"></span></div><div class="variant-actions"><button id="previous" class="arrow-button" aria-label="上一个方案">←</button><button id="next" class="arrow-button" aria-label="下一个方案">→</button><button class="text-button" id="immersive">原尺寸体验</button></div></div>
+      <div class="stage" id="main-stage"><div class="stage-backdrop" aria-hidden="true"></div><div id="main-mount" class="stage-mount"></div><span class="stage-caption" id="stage-source"></span><button id="reopen" class="reopen" hidden>重新打开样例</button></div>
+      <div class="rationale"><p id="detail"></p><p class="tradeoff"><span>我的判断</span><span id="review"></span></p></div>
+    </section>
+    <section class="scenario-bar" aria-label="场景控制">
+      <label>文案<select id="scene" aria-label="文案"><option id="scene-real" value="real" hidden disabled>Codex 真实对话</option><option value="daily">原示例</option><option value="stress">长名称压力</option><option value="edge">空白与特殊文字</option></select></label>
+      <label>材质<select id="material" aria-label="材质"><option value="quiet">中性轻雾</option><option value="baseline">B · 轻透</option><option value="ink">更透一点</option></select></label>
+      <label>背景<select id="background" aria-label="背景"><option value="host">DSH</option><option value="blue">雾蓝</option><option value="sage">苔绿</option><option value="sand">暖沙</option><option value="plum">灰紫</option></select></label>
+      <label>可读性<select id="access" aria-label="可读性"><option value="normal">标准</option><option value="solid">减少透明度</option><option value="contrast">增强对比度</option></select></label>
+      <span class="scenario-note" id="source-note"></span>
+    </section>
+    <nav class="shortlist" id="shortlist" aria-label="精选方案"></nav>
+    <details class="explorations" id="explorations"><summary>展开 12 次探索与取舍</summary><nav class="all-choices" id="all-choices" aria-label="全部方案"></nav></details>
+    <section id="comparison" class="comparison" aria-label="题签方案对照" hidden></section>
+    <footer class="study-footer"><p>方向键切换 · Enter 演示打开 · Esc 收起。最后输入保留原话，长内容截断，停留在原话上可查看完整内容。</p><p>这是保留的浏览器设计研究；<a href="../plugin.html">01 分签正式界面验证</a>。此处项目名称来自 Codex 工作目录对应的项目，状态为演示。</p></footer>
+  </main>
+  <div class="immersive-bar" hidden><button class="text-button" id="exit-immersive">返回比较台</button><span id="immersive-label"></span><button class="text-button" id="immersive-theme">切换明暗</button></div>
+  <div id="notice" role="status" aria-live="polite"></div>
+  <script type="module" src="../../src/study/project-tabs-lab.js"></script>
+</body>
+</html>

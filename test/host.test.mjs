@@ -16,7 +16,7 @@ test('host observes real sources, retains only preview candidates, and releases 
   let retains = 0, releases = 0, reject, opened;
   const list = store({ ids: ['a', 'b'], byId: { a: { displayTitle: '真实标题' }, b: { displayTitle: '另一会话' } } });
   const mounted = store('a'), status = store(new Map([['a', { running: true }]]));
-  const workspaces = store({ archivedSessionIds: [] });
+  const workspaces = store({ archivedSessionIds: [], items: [{ workspaceId: 'w', title: 'Switcher', path: '/code/switcher', sessionIds: ['a'] }] });
   const ctx = {
     sessions: { list, binding: id => id === 'a' ? binding : undefined, retain(id) { retains++; return {
       binding: { ...binding, sessionId: id }, ready: new Promise((_, no) => { reject = no; }), release() { releases++; },
@@ -28,6 +28,13 @@ test('host observes real sources, retains only preview candidates, and releases 
   const host = createHostAdapter(ctx);
   assert.equal(retains, 0); assert.equal(host.row('a').text, '实际输入'); assert.equal(host.row('a').kind, 'running');
   assert.equal(host.row('a').draft, true); assert.equal(host.theme(), 'dark');
+  assert.equal(host.row('a').workspaceName, 'Switcher');
+  let updates = 0; const stopUpdates = host.subscribe(() => updates++);
+  workspaces.set({ archivedSessionIds: [], items: [{ workspaceId: 'w', title: '重命名项目', sessionIds: ['a'] }] });
+  assert.equal(updates, 1); assert.equal(host.row('a').workspaceName, '重命名项目');
+  workspaces.set({ archivedSessionIds: [], items: [{ workspaceId: 'w2', title: '移动后的项目', sessionIds: ['a', 'b'] }] });
+  assert.equal(updates, 2); assert.equal(host.row('a').workspaceName, '移动后的项目');
+  assert.equal(host.row('b').workspaceName, '移动后的项目'); stopUpdates();
   const stop = host.preview(['b']); assert.equal(retains, 1);
   stop(); stop(); assert.equal(releases, 1);
   reject(new Error('late cancellation')); await Promise.resolve();
@@ -35,6 +42,6 @@ test('host observes real sources, retains only preview candidates, and releases 
   host.open('b'); assert.equal(opened, 'b');
   mounted.set('b'); assert.deepEqual(host.candidates(), ['b', 'a']);
   assert.equal([...storage.values()].some(value => value.includes('实际输入')), false);
-  host.destroy(); assert.equal(events.size, 0); assert.equal(input.size, 0); assert.equal(list.size, 0); assert.equal(status.size, 0);
+  host.destroy(); assert.equal(events.size, 0); assert.equal(input.size, 0); assert.equal(list.size, 0); assert.equal(status.size, 0); assert.equal(workspaces.size, 0);
   delete globalThis.sessionStorage;
 });

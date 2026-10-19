@@ -1,4 +1,4 @@
-import { HISTORY_KEY, readHistory, remember, candidates, latestUserInput, hasDraft, sessionPresentation } from './core.js';
+import { HISTORY_KEY, readHistory, remember, candidates, latestUserInput, hasDraft, sessionPresentation, sessionWorkspaceName } from './core.js';
 
 // Adapter for the public client services shipped in DSH 0.2.1-rc.2.
 export function createHostAdapter(ctx) {
@@ -59,6 +59,7 @@ export function createHostAdapter(ctx) {
       const summary = ctx.sessions.list.getSnapshot().byId[id], data = cache.get(id);
       return {
         id, title: summary?.displayTitle || summary?.title || '新会话',
+        workspaceName: sessionWorkspaceName(ctx.workspaces.list.getSnapshot(), id, summary),
         text: data?.text || '', placeholder: data?.error ? '暂时无法读取最后输入' : data?.ready ? '还没有输入' : '正在读取最后输入…',
         ...sessionPresentation(ctx.uiSession.sessionStatus.getSnapshot().get(id), summary, data?.draft),
       };

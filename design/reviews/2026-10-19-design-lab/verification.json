@@ -1,0 +1,89 @@
+{
+  "date": "2026-10-19",
+  "scope": "Browser-only design study using invented fixtures. No DSH install or native validation.",
+  "candidates": 28,
+  "baseline": "B light/translucent, plugin 0.1.3",
+  "geometry": {
+    "cases": 56,
+    "passed": true
+  },
+  "narrow": {
+    "cases": 56,
+    "width": 480,
+    "passed": true
+  },
+  "stress": {
+    "cases": 24,
+    "verbatim": true,
+    "injectedNodes": 0,
+    "maxExcerptHeight": 84
+  },
+  "accessibility": {
+    "cases": 16,
+    "opaque": true,
+    "mediaEmulation": {
+      "reducedMotion": true,
+      "reducedTransparency": true,
+      "increasedContrast": true,
+      "iconPathCount": 45,
+      "staticAcrossFrames": true
+    },
+    "notTested": [
+      "VoiceOver",
+      "OS compositor",
+      "native host changes"
+    ],
+    "complianceClaim": false
+  },
+  "themeSimulation": {
+    "cases": 10,
+    "lightFills": 5,
+    "darkFills": 5,
+    "realHostTokensConnected": false
+  },
+  "ui": {
+    "overview": 28,
+    "typographyFilter": 7,
+    "compareRemove": "4 to 3",
+    "keyboardWrap": "Home then ArrowLeft selects index 4",
+    "enter": "fixture confirmation observed",
+    "escape": "closes, reopen restores",
+    "customText": "verbatim, no injected elements, reset works",
+    "baselineButton": "mouse click and Space key cycle release to candidate; held intermediate state not separately captured"
+  },
+  "visualReview": {
+    "allLightAndDark": true,
+    "contactSheets": 8,
+    "finalists": [
+      "25",
+      "26",
+      "27",
+      "28"
+    ],
+    "fixes": [
+      "Mixed serif line box contained within 84px",
+      "Long text without punctuation falls back to regular system text",
+      "Explicit accessible names on scene controls"
+    ]
+  },
+  "originalTextCases": 27,
+  "productionFilesUnchanged": true,
+  "existingTestsPassed": 12,
+  "limitations": [
+    "Study renderer has its own demo interactions; production keyboard and host data adaptation are not under test.",
+    "Translucent surfaces are reviewed over saved DSH backgrounds and simulated hues.",
+    "Font fallback on other systems remains unverified."
+  ],
+  "labResponsive": {
+    "cases": 6,
+    "width": 390,
+    "noHorizontalOverflow": true,
+    "comparisonSelectionVisible": true,
+    "galleryOpensCandidate": true
+  },
+  "checkCommand": {
+    "passed": true,
+    "scripts": 122,
+    "localReferences": 267
+  }
+}

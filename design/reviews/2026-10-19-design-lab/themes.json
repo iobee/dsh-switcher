@@ -1,0 +1,102 @@
+[
+  {
+    "fill": "color(srgb 0.94902 0.952941 0.960784 / 0.82)",
+    "ink": "rgb(53, 56, 61)",
+    "palette": "neutral",
+    "panel": [
+      942,
+      190
+    ],
+    "theme": "light"
+  },
+  {
+    "fill": "color(srgb 0.909804 0.929412 0.960784 / 0.82)",
+    "ink": "rgb(53, 56, 61)",
+    "palette": "blue",
+    "panel": [
+      942,
+      190
+    ],
+    "theme": "light"
+  },
+  {
+    "fill": "color(srgb 0.917647 0.941176 0.921569 / 0.82)",
+    "ink": "rgb(53, 56, 61)",
+    "palette": "sage",
+    "panel": [
+      942,
+      190
+    ],
+    "theme": "light"
+  },
+  {
+    "fill": "color(srgb 0.94902 0.92549 0.886274 / 0.82)",
+    "ink": "rgb(53, 56, 61)",
+    "palette": "sand",
+    "panel": [
+      942,
+      190
+    ],
+    "theme": "light"
+  },
+  {
+    "fill": "color(srgb 0.933333 0.913725 0.952941 / 0.82)",
+    "ink": "rgb(53, 56, 61)",
+    "palette": "plum",
+    "panel": [
+      942,
+      190
+    ],
+    "theme": "light"
+  },
+  {
+    "fill": "color(srgb 0.12549 0.12549 0.137255 / 0.84)",
+    "ink": "rgb(230, 231, 233)",
+    "palette": "neutral",
+    "panel": [
+      942,
+      190
+    ],
+    "theme": "dark"
+  },
+  {
+    "fill": "color(srgb 0.109804 0.145098 0.2 / 0.84)",
+    "ink": "rgb(230, 231, 233)",
+    "palette": "blue",
+    "panel": [
+      942,
+      190
+    ],
+    "theme": "dark"
+  },
+  {
+    "fill": "color(srgb 0.12549 0.168627 0.156863 / 0.84)",
+    "ink": "rgb(230, 231, 233)",
+    "palette": "sage",
+    "panel": [
+      942,
+      190
+    ],
+    "theme": "dark"
+  },
+  {
+    "fill": "color(srgb 0.188235 0.160784 0.137255 / 0.84)",
+    "ink": "rgb(230, 231, 233)",
+    "palette": "sand",
+    "panel": [
+      942,
+      190
+    ],
+    "theme": "dark"
+  },
+  {
+    "fill": "color(srgb 0.168627 0.141176 0.188235 / 0.84)",
+    "ink": "rgb(230, 231, 233)",
+    "palette": "plum",
+    "panel": [
+      942,
+      190
+    ],
+    "theme": "dark"
+  }
+]
