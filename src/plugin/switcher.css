@@ -3,7 +3,7 @@
   --sw-tint: rgb(241 243 245 / .76); --sw-edge: rgb(255 255 255 / .85);
   --sw-ink: #34383e; --sw-muted: #656a72; --sw-faint: #81858c;
   --sw-cap: rgb(33 41 53 / .045); --sw-rule: rgb(33 41 53 / .08);
-  --sw-selected: rgb(255 255 255 / .76); --sw-selected-edge: rgb(255 255 255 / .88);
+  --sw-selected: rgb(33 41 53 / .065); --sw-selected-edge: rgb(33 41 53 / .13);
   --sw-project: #565d67; --sw-note: #626975;
   --sw-blue: #42658f; --sw-amber: #80612f; --sw-opaque: #f1f3f5;
   --sw-shadow: 0 18px 44px rgb(28 32 40 / .12), 0 2px 5px rgb(28 32 40 / .035), inset 0 1px rgb(255 255 255 / .65);
@@ -38,6 +38,7 @@
   background-color: rgb(127 127 127 / .025); box-shadow: inset 0 0 0 1px var(--sw-rule);
 }
 .dsh-switcher-card[aria-selected=true] { background-color: var(--sw-selected); box-shadow: inset 0 0 0 1px var(--sw-selected-edge); }
+.dsh-switcher[data-theme=light] .dsh-switcher-card[aria-selected=true] { --sw-muted: #5b626c; --sw-note: #5b626c; }
 .dsh-switcher-project {
   grid-area: project; min-width: 0; margin: -10px -10px 0; padding: 7px 10px 6px; height: 33px;
   border-radius: 11px 11px 0 0; background: var(--sw-cap); color: var(--sw-project);
@@ -73,5 +74,5 @@
 @media (prefers-contrast: more) {
   .dsh-switcher { --sw-project: var(--sw-ink); --sw-note: var(--sw-ink); --sw-faint: var(--sw-ink); --sw-selected-edge: var(--sw-ink); }
   .dsh-switcher-card[aria-selected=true] { outline: 1px solid var(--sw-ink); outline-offset: -3px; }
-  .dsh-switcher-status, .dsh-switcher-icon { color: var(--sw-ink) !important; }
+  .dsh-switcher-status, .dsh-switcher-icon, .dsh-switcher-excerpt { color: var(--sw-ink) !important; }
 }

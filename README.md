@@ -20,7 +20,7 @@ npm run build
 npm test
 npm run check
 npm run pack:local
-dsh plugin --profile desktop add /absolute/path/to/dsh-switcher/dist/dsh-switcher-0.1.4.tgz --offline --ignore-scripts
+dsh plugin --profile desktop add /absolute/path/to/dsh-switcher/dist/dsh-switcher-0.1.5.tgz --offline --ignore-scripts
 ```
 
 安装包只有客户端代码、空的宿主入口、插件补丁、包信息和说明。使用官方插件安装路径，不修改 DSH 应用包。针对 DSH **0.2.1-rc.2** 的公开客户端服务开发，目前本机验证平台为 macOS。
@@ -33,9 +33,9 @@ Ctrl + Tab 由主文档直接处理完整的按下/松开事件，不通过宿�
 
 当前采用 **01「分签」/ Dia 尺寸 / 完整 11「五拍」图标**。用户于 2026-10-19 从题签精修的 12 版中最终选择 01，正式实现独立题签和卡片细边。采用该方案的中性半透明明暗材质；此前 B「轻透」、05 亮色 / 05 raised 暗色继续归档保留。
 
-整体 942 × 190，单项 182 × 158，题签高 33px，图标 20px。项目 12px、标题 15px，状态和最后输入 11px；长项目名及原话单行省略，标题最多两行。不足五项时容器随数量缩短，窄窗口横向滚动。选中卡片提亮，无缩放和额外操作提示。浮层使用网页 `backdrop-filter`，尊重减少动态效果、减少透明度及增强对比度设置。
+整体 942 × 190，单项 182 × 158，题签高 33px，图标 20px。项目 12px、标题 15px，状态和最后输入 11px；长项目名及原话单行省略，标题最多两行。不足五项时容器随数量缩短，窄窗口横向滚动。选中卡片通过柔和的明度差区分：亮色为浅灰压深，暗色为轻微提亮，无缩放和额外操作提示。浮层使用网页 `backdrop-filter`，尊重减少动态效果、减少透明度及增强对比度设置。
 
-![01 分签亮色正式界面样例](design/reviews/2026-10-19-split-production/light.png)
+![01 分签亮色正式界面样例](design/reviews/2026-10-19-light-selection/light.png)
 
 ## 开发与历史方案
 
